@@ -1,0 +1,325 @@
+\documentclass[12pt]{article}
+
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+\usepackage{tikz,tikz-qtree}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata,backgrounds,snakes}
+\usepackage[framemethod=tikz]{mdframed}
+
+%SPECIAL SYMBOLS
+
+\newcommand{\CSP}{{\rm CSP}}
+\newcommand{\nin}{\not\in}         % Not in set
+\newcommand{\DA}{{\bf DA }}    % Variety DA
+\newcommand{\then}{\rightarrow}    % Implication arrow
+\newcommand{\into}{\rightarrow}    % Function arrow
+\newcommand{\xbar}{\overline{x}}   % x with an bar on top
+\newcommand{\Xbar}{\overline{X}}   % X with an bar on top
+\newcommand{\ybar}{\overline{y}}   % y with an bar on top
+\newcommand{\abar}{\overline{a}}   % a with an bar on top
+\newcommand{\EQN}{{\rm EQN}}
+\newcommand{\TEQN}{{\rm T\!-\!EQN}}
+\newcommand{\rl}{{\bf R}_1 \vee {\bf L}_1}
+%\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\back}{$\backslash$}
+\renewcommand{\choose}[2]{\genfrac{(}{)}{0pt}{}{#1}{#2}}
+\newcommand{\xor}{\oplus}
+
+\newcommand{\dmd}{% diamond
+  {\qbezier(0,0)(0.5,0.5)(1,1)
+   \qbezier(0,0)(-0.5,0.5)(-1,1)
+   \qbezier(0,2)(0.5,1.5)(1,1)
+   \qbezier(0,2)(-0.5,1.5)(-1,1)}}
+
+\newcommand{\dmdplus}{% diamond with + inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(0,0.5){\line(0,1){1}}
+      \put(-0.5,1){\line(1,0){1}}
+    \end{picture}}}
+
+\newcommand{\dmdminus}{% diamond with - inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(-0.5,1){\line(1,0){1}}
+    \end{picture}}}
+
+\newcommand{\dmdplusminus}{% diamond with +/- inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(0,0.8){\line(0,1){0.8}}
+      \put(-0.4,1.2){\line(1,0){0.8}}
+      \put(-0.4,0.6){\line(1,0){0.8}}
+     \end{picture}}}
+
+
+
+%SHORTCUTS FOR MATHCAL
+
+\newcommand{\cH}{\mathcal{ H}}
+\newcommand{\cC}{\mathcal{ C}}
+\newcommand{\cJ}{\mathcal{ J}}
+\newcommand{\cM}{\mathcal{ M}}
+\newcommand{\cL}{\mathcal{ L}}
+\newcommand{\cR}{\mathcal{ R}}
+\newcommand{\cP}{\mathcal{ P}}
+\newcommand{\cQ}{\mathcal{ Q}}
+
+\newcommand{\Pol}{{\rm Pol}}
+
+
+\newcommand{\maps}\longrightarrow
+\newcommand{\cmaps}\Longrightarrow
+\newcommand{\vocab}{\tau}
+\newcommand{\uest}{\operatorname{{\bf U}}}
+\newcommand{\nest}{\operatorname{{\bf N}}}
+\newcommand{\mest}{\operatorname{{\bf M}}}
+\newcommand{\pest}{\operatorname{{\bf P}}}
+\newcommand{\test}{\operatorname{{\bf T}}}
+\newcommand{\sest}{\operatorname{{\bf S}}}
+\newcommand{\dest}{\operatorname{{\bf D}}}
+\newcommand{\cest}{\operatorname{{\bf C}}}
+\newcommand{\best}{\operatorname{{\bf B}}}
+\newcommand{\aest}{\operatorname{{\bf A}}}
+\newcommand{\kest}{\operatorname{{\bf K}}}
+\newcommand{\hest}{\operatorname{{\bf H}}}
+\newcommand{\gest}{\operatorname{{\bf G}}}
+\newcommand{\csp}{\operatorname{CSP}}
+\newcommand{\tcsp}{\operatorname{TCSP}}
+\newcommand{\tpol}{\operatorname{TPol}}
+\newcommand{\ext}{\operatorname{ext}}
+\newcommand{\set}[1]{\overline{#1}}
+\newcommand{\atomic}{\operatorname{{\mathcal A}}}
+\newcommand{\atomicsent}{\operatorname{{\mathcal B}}}
+\newcommand{\composed}{\circ}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\atom}{\alpha}
+\newcommand{\atomsent}{\beta}
+\newcommand{\sent}{\operatorname{sent}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\ide}{\operatorname{id}}
+\newcommand{\testfixed}{\operatorname{{\mathcal TK}}}
+\newcommand{\diagram}[1]{{#1}^*}
+\newcommand{\sub}{\subseteq}
+
+
+\newcommand{\arity}{\rho}
+\newcommand{\rsymbol}{\operatorname{r}}
+
+\newcommand{\wbar}{{\overline{w}}}
+
+
+\newcommand{\imply}[2]{{\bf (#1)$\rightarrow$(#2)}}
+\newcommand{\twoimply}[2]{{\bf (#1)$\leftrightarrow$(#2)}}
+
+
+\newcommand{\dset}{\operatorname{DS}}
+\newcommand{\one}{{\bf 1}}
+\newcommand{\origin}{\operatorname{{\mathcal O}}}
+\newcommand{\image}{\operatorname{{\mathcal I}}}
+\newcommand{\types}{\operatorname{{\mathcal T}}}
+\newcommand{\rel}{\operatorname{rel}}
+\newcommand{\maj}{\operatorname{MAJ}}
+
+\newcommand{\sat}{\operatorname{SAT}}
+
+\newcommand{\pointnolinear}{K_1}
+
+
+\newcommand{\mcd}{\operatorname{gcd}}
+
+
+\newcommand{\NP}{{\rm NP}}
+\newcommand{\coNP}{{\rm co-NP}}
+
+
+
+%\newcommand{\bbbz}{{\mathbb Z}}
+\newcommand{\block}{\square}
+\newcommand{\ul}{\underline}
+
+
+\usepackage[latin1]{inputenc} % entree 8 bits iso-latin1
+\usepackage[T1]{fontenc}      % encodage 8 bits des fontes utilisees
+
+
+\topmargin -1in 
+\textheight 9.6in
+\textwidth 7.1in
+\oddsidemargin = -.25in
+
+\begin{document}
+
+\smallskip
+\begin{center}
+\large \bf IFT-2002 Informatique Théorique \\ Devoir 1
+\end{center}
+
+\hfill À remettre le 11 octobre 2018 avant minuit
+
+\bigskip
+
+\noindent {\bf Question 1.}
+
+
+Construisez des automates finis qui acceptent
+les langages suivants. Les automates peuvent être non-déterministes si cela vous simplifie la tâche. Par contre, vous ne pouvez pas utiliser des transitions étiquetées par un mot (voir p.~38 dans les anciennes notes de cours), par une expression régulière ou par le mot vide $\epsilon$.
+
+\begin{itemize}
+\item
+Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui ne contiennent ni la sous-séquence $ab$ ni la sous-séquence $ba$.
+\item
+Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui soit débutent par un $a$ et sont de longueur paire soit débutent par un $b$ et sont de longueur impaire.
+\end{itemize}
+
+
+\bigskip
+
+\noindent {\bf Question 2.}
+Donnez des expressions régulières qui représentent les deux langages de la question 1.
+
+\bigskip
+
+\noindent {\bf Question 3.}
+Construisez un automate déterministe qui accepte le même langage que l'automate non-déterministe ci-dessous. {\em Vous pouvez omettre l'état poubelle si ça vous permet d'avoir un automate plus lisible.}
+
+
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm,
+                    semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[initial by arrow,state,initial text=] (1)                    {1};
+    \node[state] (2) [right of=1] {2};
+  \node[accepting,state] (3) [below of=1] {3};
+  \node[state] (4) [right of=3] {4};
+
+
+
+  \path
+
+	(1) edge    [loop above]          node {$a$} (1)
+         (1) edge node {$a,b$} (2)
+         (1) edge node  {$b$} (3)
+
+
+	(2) edge    [loop right]          node {$a$} (2)
+         (2) edge node  {$a$} (4)
+
+%         (3) edge [bend left] node  {$b$} (1)
+         (3) edge node {$b$} (4)
+
+         (4) edge node  {$a$} (1)
+
+              ;
+
+\end{tikzpicture}
+
+
+
+\bigskip
+\noindent {\bf Question 4.}
+
+\smallskip
+\noindent
+Soit $K$ le langage suivant sur l'alphabet $\{0,1\}$.
+$$K = \{0^i 1 0^j 1 0^k | i,j,k \in {\mathbb N} \wedge k = \max\{i,j\}\}$$
+\bigskip
+\noindent
+Montrez que $K$ n'est pas régulier.
+
+\newpage
+
+\noindent {\bf Question 5.}
+
+\noindent
+Soit $L$ un langage sur l'alphabet $\Sigma$. On définit le langage $L_{presque}$ (ou simplement $L_p$) comme suit :
+$$L_p = \{xay : a\in \Sigma \wedge x,y \in \Sigma^* \wedge xy \in L\}.$$ 
+En d'autres mots, $L_p$ contient les mots $w$ qui ont la propriété suivante: il est possible d'obtenir un mot de $L$ en effaçant une des lettres de $w$. 
+
+\noindent
+Montrez que si $L$ est régulier alors $L_p$ est aussi régulier.
+
+{\em Quelques remarques/indices. Partez d'un automate pour $L$ et construisez en un pour $L_p$. Utilisez le non-déterminisme. Combinez deux ``copies'' de l'automate pour $L$. Je ne demande pas une preuve formelle que votre construction fonctionne mais je m'attends à ce que votre construction soit claire.}
+
+\bigskip
+
+\noindent {\bf Question 6.}
+
+Soit $\Sigma$ l'alphabet de 8 symboles $\left\{{\scriptsize \left[\begin{array}{c} 0 \\ 0\\
+0 \end{array}\right]}, {\scriptsize \left[\begin{array}{c} 0 \\ 0\\
+1 \end{array}\right]}, {\scriptsize \left[\begin{array}{c} 0 \\ 1\\
+0 \end{array}\right]}, {\scriptsize \left[\begin{array}{c} 0 \\ 1\\
+1 \end{array}\right]}, {\scriptsize \left[\begin{array}{c} 1 \\ 0\\
+0 \end{array}\right]}, {\scriptsize \left[\begin{array}{c} 1 \\ 0\\
+1 \end{array}\right]}, {\scriptsize \left[\begin{array}{c} 1 \\ 1\\
+0 \end{array}\right]}, {\scriptsize \left[\begin{array}{c} 1 \\ 1\\
+1 \end{array}\right]}\right\}$. Un mot $w \in \Sigma^*$ de longueur
+$n$ peut-être vu à la fois comme une suite de $n$ colonnes de 3 bits
+ou comme 3 rangées de $n$ bits qui peuvent être interprétées comme 3
+entiers $a_w, b_w, c_w$ écrits en représentation binaire. Montrez
+que le langage $L \subseteq \Sigma^*$ des $w$ tels que $
+c_w = \max\{a_w, b_w\}$ est un langage régulier.
+
+\bigskip
+Par exemple, on aura ${\scriptsize \left[\begin{array}{c} 1 \\ 1\\
+1 \end{array}\right]} {\scriptsize \left[\begin{array}{c} 1 \\ 0\\
+1 \end{array}\right]} {\scriptsize \left[\begin{array}{c} 0 \\ 1\\
+0 \end{array}\right]} \in L$ puisque dans ce cas on a $a_w = 6$,
+$b_w = 5$, $c_w = 6$ et $6 = \max\{6,5\}$. 
+
+\bigskip
+Par contre${\scriptsize \left[\begin{array}{c} 0 \\ 1\\
+0 \end{array}\right]} {\scriptsize \left[\begin{array}{c} 1 \\ 0\\
+1 \end{array}\right]} {\scriptsize \left[\begin{array}{c} 0 \\ 1\\
+0 \end{array}\right]} \nin L$ puisque dans ce cas on a $a_w = 2$,
+$b_w = 5$ et $c_w = 2$ mais $2 \neq \max\{2,5\}$.
+
+Si vous donnez votre réponse sous la forme d'un automate, vous pouvez omettre l'état poubelle si cela rend votre réponse plus lisible.
+
+\bigskip
+
+\noindent {\bf Question 7.}
+
+Donnez une expression régulière qui représente le langage accepté par l'automate ci-dessous. Donnez les étapes intermédiaires (c'est pour votre bien et celui de mon correcteur).
+
+\begin{figure}[thb]
+\begin{center}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm,
+                    semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[initial by arrow,state,initial text=] (1) {$1$};
+  \node[state] (2) [right of=1] {2};
+  \node[accepting,state] (3) [right of=2] {3};
+
+
+  \path 
+		(1) edge [bend left] node {$a,b$} (2)
+		
+		(2) edge node {$a$} (3)
+		(2) edge  node  {$a$} (1)
+		
+		(3) edge [loop right] node {$a$} (3)
+		(3) edge [bend left]  node {$b$} (1)
+      ;
+
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+\bigskip
+
+\noindent {\bf Question 8. (facultative)}
+
+
+Soit $L$ un langage sur l'alphabet $\{a,b\}$. Définissons $K$ sur ce même alphabet par $K = \{x | xx \in L\}$. Montrez que si $L$ est régulier alors $K$ est aussi régulier.
+
+(Les bonnes idées qui ne marchent pas tout à fait seront récompensées!)
+
+\end{document}
