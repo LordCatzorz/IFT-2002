@@ -383,32 +383,22 @@ Si vous donnez votre réponse sous la forme d'un automate, vous pouvez omettre l'
 
 {\bf Réponse:}
 
-\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm, semithick]
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=6cm, semithick]
 \tikzstyle{every state}=[draw=black,text=black]
 
-\node[state] (0) [below of=5] {$\{\}$};
-\node[initial by arrow,state,initial text=] (1) {$\{1\}$};
-\node[state] (2) [right of=1] {$\{1,2\}$};
-\node[state] (3) [below of=2] {$\{2,3\}$};
-\node[state] (4) [right of=2] {$\{1,2,4\}$};
-\node[state] (5) [right of=3] {$\{2,4\}$};
-\node[state] (6) [below of=3] {$\{4\}$};
+\node[initial above,state,initial text=] (1) {$a=b=c$};
+\node[state, align=center] (2) [right of=1] {$a>b$\\$a=c$};
+\node[state, align=center] (3) [left of=1] {$a<b$\\$b=c$};
 
 
 \path
-  (0) edge[loop right] node  {$a, b$} (0)
-  (1) edge node  {$a$} (2)
-  (1) edge node  {$b$} (3)
-  (2) edge node  {$a$} (4)
-  (2) edge node  {$b$} (3)
-  (3) edge node  {$a$} (5)
-  (3) edge node  {$b$} (6)
-  (4) edge[loop right] node  {$a$} (4)
-  (4) edge node  {$b$} (3)
-  (5) edge node  {$a$} (4)
-  (5) edge node  {$b$} (0)
-  (6) edge node  {$a$} (1)
-  (6) edge node  {$b$} (0)
+  (1) edge[loop below] node  {$\qsixa,\qsixh$} (1)
+  (1) edge node[above]  {$\qsixf$} (2)
+  (1) edge node[above]  {$\qsixd$} (3)
+
+  (2) edge[loop below] node  {$\qsixa,\qsixc,\qsixf,\qsixh$} (2)
+  (3) edge[loop below] node  {$\qsixa,\qsixd,\qsixe,\qsixh$} (3)
+  
 ;
 
 \end{tikzpicture}
