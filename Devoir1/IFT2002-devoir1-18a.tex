@@ -212,10 +212,10 @@ Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui soit débutent par un $a$ e
   
   (1) edge node {$a$} (2)
   (1) edge node {$b$} (4)
-  (2) edge[bend left] node {$a$} (3)
-  (3) edge[bend left] node {$a$} (2)
-  (4) edge[bend left] node {$b$} (5)
-  (5) edge[bend left] node {$b$} (4);
+  (2) edge[bend left] node {$a,b$} (3)
+  (3) edge[bend left] node {$a,b$} (2)
+  (4) edge[bend left] node {$a,b$} (5)
+  (5) edge[bend left] node {$a,b$} (4);
   
   \end{tikzpicture}
 
@@ -223,6 +223,10 @@ Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui soit débutent par un $a$ e
 
 \noindent {\bf Question 2.}
 Donnez des expressions régulières qui représentent les deux langages de la question 1.
+
+{\bf Réponse 1:} $a^*\cup b^*$ 
+
+{\bf Réponse 2:} $(a(a \cup b) \cup b)((a \cup b)(a \cup b))^* $
 
 \newpage
 \bigskip
