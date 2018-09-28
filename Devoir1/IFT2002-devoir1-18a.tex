@@ -175,6 +175,9 @@ les langages suivants. Les automates peuvent être non-déterministes si cela vous
 \item
 Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui ne contiennent ni la sous-séquence $ab$ ni la sous-séquence $ba$.
 
+
+{\bf Réponse:}
+
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm, semithick]
 \tikzstyle{every state}=[draw=black,text=black]
 
@@ -193,6 +196,8 @@ Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui ne contiennent ni la sous-
 \item
 Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui soit débutent par un $a$ et sont de longueur paire soit débutent par un $b$ et sont de longueur impaire.
 \end{itemize}
+
+{\bf Réponse:}
 
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm, semithick]
   \tikzstyle{every state}=[draw=black,text=black]
@@ -219,6 +224,7 @@ Sur l'alphabet $\{a,b\}$, le langage $L$ des mots qui soit débutent par un $a$ e
 \noindent {\bf Question 2.}
 Donnez des expressions régulières qui représentent les deux langages de la question 1.
 
+\newpage
 \bigskip
 
 \noindent {\bf Question 3.}
@@ -255,7 +261,7 @@ Construisez un automate déterministe qui accepte le même langage que l'automate 
 
 \end{tikzpicture}
 
-Réponse:
+{\bf Réponse:}
 
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm, semithick]
 \tikzstyle{every state}=[draw=black,text=black]
@@ -290,6 +296,7 @@ Réponse:
 
 
 \bigskip
+\newpage
 \noindent {\bf Question 4.}
 
 \smallskip
@@ -299,6 +306,34 @@ $$K = \{0^i 1 0^j 1 0^k | i,j,k \in {\mathbb N} \wedge k = \max\{i,j\}\}$$
 \bigskip
 \noindent
 Montrez que $K$ n'est pas régulier.
+
+{\bf Réponse:}
+
+\noindent
+Supposons que $K$ est régulier. Il satisfait donc le lemme de pompage pour une certaine longueur de pompage $p > 0$.
+
+\noindent
+Quel que soit $p$, considérons le mot $w=0^p10^p10^p$. Ce mot est de longueur 3$p$+2 et appartient à $K$ donc il peut être "pompé".
+
+\noindent
+Plus pécisément, il existe $w = xyz$ tel que
+\begin{enumerate}
+  \item $|xy| \leq p$
+  \item $|y| > 0$
+  \item $xy^iz \in K$ pour tout $i \in {\mathbb N}$.
+\end{enumerate}
+
+\noindent
+Puisque $|xy| \leq p$ et puisque les $p$ premiers symboles de $w$ sont des $0$, on sait que $y$ ne contient que des $0$.
+
+\noindent 
+On ne sait pas combien de $0$ sont contenus dans $y$, mais on sait qu'il en a $a$ pour un certain $a$ compris entre $1$ et $p$.
+
+\noindent
+Prenons $i = 3$. On a $xy^2z = xyyz = 0^{p+a}10^p10^p$. Ce mot ne fait pas partie du language, puisque $a > 0$ et que $p+a > p$ alors que le mot doit finir avec le nombre de $0$ le plus nombreux ($0^{p+a}$ dans ce cas), mais il fini avec $0^p$.
+
+\noindent
+$K$ n'est donc pas régulier.
 
 \newpage
 
