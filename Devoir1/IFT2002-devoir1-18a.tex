@@ -280,8 +280,8 @@ Construisez un automate déterministe qui accepte le même langage que l'automate 
 
 \node[state] (0) [below of=5] {$\{\}$};
 \node[initial by arrow,state,initial text=] (1) {$\{1\}$};
-\node[state] (2) [right of=1] {$\{1,2\}$};
-\node[state] (3) [below of=2] {$\{2,3\}$};
+\node[accepting, state] (2) [right of=1] {$\{1,2\}$};
+\node[accepting, state] (3) [below of=2] {$\{2,3\}$};
 \node[state] (4) [right of=2] {$\{1,2,4\}$};
 \node[state] (5) [right of=3] {$\{2,4\}$};
 \node[state] (6) [below of=3] {$\{4\}$};
@@ -360,6 +360,8 @@ En d'autres mots, $L_p$ contient les mots $w$ qui ont la propriété suivante: il 
 Montrez que si $L$ est régulier alors $L_p$ est aussi régulier.
 
 {\em Quelques remarques/indices. Partez d'un automate pour $L$ et construisez en un pour $L_p$. Utilisez le non-déterminisme. Combinez deux ``copies'' de l'automate pour $L$. Je ne demande pas une preuve formelle que votre construction fonctionne mais je m'attends à ce que votre construction soit claire.}
+
+{\bf Réponse partiel:}
 
 \bigskip
 \newpage
