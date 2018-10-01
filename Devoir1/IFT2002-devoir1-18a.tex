@@ -4,7 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts,amssymb}
 \usepackage{tikz,tikz-qtree}
-\usetikzlibrary{positioning}
+\usetikzlibrary{fit, positioning}
 \usetikzlibrary{automata,backgrounds,snakes}
 \usepackage[framemethod=tikz]{mdframed}
 
@@ -363,6 +363,86 @@ Montrez que si $L$ est régulier alors $L_p$ est aussi régulier.
 
 {\bf Réponse partiel:}
 
+Soit $L = (Q, \Sigma, \rho, q, F)$, construisons $L_2$ une copie de $L$.
+
+$L_2 = (Q_2, \Sigma, \rho_2, q_2, F_2)$ 
+
+Construisons $L_p$, un $\epsilon$-AFN comme suit:
+
+$L_p = (Q', \Sigma, \rho', q, F_2)$ avec
+\begin{itemize}
+\item $Q' = Q \cup Q_2 \cup {q'}$ où $q'$ est un nouvel état.
+\item $\rho'=
+\rho \cup 
+\rho_2 \cup 
+\{(p, s, q'): p \in F \wedge s \in \Sigma  \} \cup
+\{(q', s, q_2): s \in \Sigma\}$ donc, 
+\\toutes les transitions de $L$ et $L_2$ 
+\\avec une transition de tous les symboles des états finaux de $L$ vers le nouvel état, 
+\\et du nouvel état vers l'état inital de $L_2$
+\end{itemize}
+
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=1.5cm, semithick, show background rectangle]
+  \tikzstyle{every state}=[draw=black,text=black]
+  \node[initial,state,initial text=] (1) {$q$};
+  \node[state] (2) [right of=1] {};
+  \node[state] (3) [right of=2] {};
+  \node[accepting, state] (4) [above of=2] {};
+  \node[state] (5) [above of=3] {};
+  \node[accepting, state] (6) [below of=2] {};
+  \node[state] (7) [below of=3] {};
+  \node[state] (8) [right of=7, draw=none] {$L$};
+\end{tikzpicture}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=1.5cm, semithick, show background rectangle]
+  \tikzstyle{every state}=[draw=black,text=black]
+  \node[initial,state,initial text=] (1) {$q_2$};
+  \node[state] (2) [right of=1] {};
+  \node[state] (3) [right of=2] {};
+  \node[accepting, state] (4) [above of=2] {};
+  \node[state] (5) [above of=3] {};
+  \node[accepting, state] (6) [below of=2] {};
+  \node[state] (7) [below of=3] {};
+  \node[state] (8) [right of = 7, draw=none] {$L_2$};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[->,shorten >=1pt, node distance=0.5, auto, semithick, show background rectangle]
+  \tikzstyle{every state}=[draw=black,text=black]
+  %L
+  \node[initial above,state,initial text=] (LN1) {$q$};
+  \node[state] (LN2) [right =of LN1] {};
+  \node[state] (LN3) [right =of LN2] {};
+  \node[state] (LN4) [above =of LN2] {};
+  \node[state] (LN5) [above =of LN3] {};
+  \node[state] (LN6) [below =of LN2] {};
+  \node[state] (LN7) [below =of LN3] {};
+  \node[state] (LN8) [right =of LN7, draw=none] {$L$};
+  \node[fit=(LN1)(LN2)(LN3)(LN4)(LN5)(LN6)(LN7)(LN8),draw=black] (LBox) {};
+
+  %q
+  \node[state] (q) [right=of LBox] {$q'$};
+
+  %L2
+  \node[state] (L2N1) [right =of q] {$q_2$};
+  \node[state] (L2N2) [right =of L2N1] {};
+  \node[state] (L2N3) [right =of L2N2] {};
+  \node[accepting, state] (L2N4) [above =of L2N2] {};
+  \node[state] (L2N5) [above =of L2N3] {};
+  \node[accepting, state] (L2N6) [below =of L2N2] {};
+  \node[state] (L2N7) [below =of L2N3] {};
+  \node[state] (L2N8) [right =of L2N7, draw=none] {$L_2$};
+  \node[fit=(L2N1)(L2N2)(L2N3)(L2N4)(L2N5)(L2N6)(L2N7)(L2N8),draw=black] (L2Box) {};
+
+
+  \node[state] (1) [right = of L2Box.south east, draw=none] {$L_p$};
+
+
+;
+\end{tikzpicture}
+
+
+
+
 \bigskip
 \newpage
 \noindent {\bf Question 6.}
@@ -400,7 +480,6 @@ Si vous donnez votre réponse sous la forme d'un automate, vous pouvez omettre l'
 
   (2) edge[loop below] node  {$\qsixa,\qsixc,\qsixf,\qsixh$} (2)
   (3) edge[loop below] node  {$\qsixa,\qsixd,\qsixe,\qsixh$} (3)
-  
 ;
 
 \end{tikzpicture}
