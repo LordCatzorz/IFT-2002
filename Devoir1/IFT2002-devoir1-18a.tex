@@ -416,25 +416,31 @@ $L_p = (Q', \Sigma, \rho', q, F_2)$ avec
   \node[state] (LN5) [above =of LN3] {};
   \node[state] (LN6) [below =of LN2] {};
   \node[state] (LN7) [below =of LN3] {};
-  \node[state] (LN8) [right =of LN7, draw=none] {$L$};
+  \node (LN8) [right =of LN7, draw=none] {$L$};
   \node[fit=(LN1)(LN2)(LN3)(LN4)(LN5)(LN6)(LN7)(LN8),draw=black] (LBox) {};
 
   %q
   \node[state] (q) [right=of LBox] {$q'$};
 
   %L2
-  \node[state] (L2N1) [right =of q] {$q_2$};
+  \node[state,node distance=2] (L2N1) [right =of q] {$q_2$};
   \node[state] (L2N2) [right =of L2N1] {};
   \node[state] (L2N3) [right =of L2N2] {};
   \node[accepting, state] (L2N4) [above =of L2N2] {};
   \node[state] (L2N5) [above =of L2N3] {};
   \node[accepting, state] (L2N6) [below =of L2N2] {};
   \node[state] (L2N7) [below =of L2N3] {};
-  \node[state] (L2N8) [right =of L2N7, draw=none] {$L_2$};
+  \node(L2N8) [right =of L2N7, draw=none] {$L_2$};
   \node[fit=(L2N1)(L2N2)(L2N3)(L2N4)(L2N5)(L2N6)(L2N7)(L2N8),draw=black] (L2Box) {};
 
 
-  \node[state] (1) [right = of L2Box.south east, draw=none] {$L_p$};
+  \node (1) [right = of L2Box.south east, draw=none] {$L_p$};
+
+  \path
+    (LN4) edge[bend left = 55] node {$\forall s \in \Sigma$} (q)
+    (LN6) edge[bend right = 55, below] node {$\forall s \in \Sigma$} (q)
+    (q) edge node {$\forall s \in \Sigma$} (L2N1)
+  ;
 
 
 ;
