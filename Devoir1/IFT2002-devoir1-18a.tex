@@ -361,25 +361,25 @@ Montrez que si $L$ est régulier alors $L_p$ est aussi régulier.
 
 {\em Quelques remarques/indices. Partez d'un automate pour $L$ et construisez en un pour $L_p$. Utilisez le non-déterminisme. Combinez deux ``copies'' de l'automate pour $L$. Je ne demande pas une preuve formelle que votre construction fonctionne mais je m'attends à ce que votre construction soit claire.}
 
-{\bf Réponse partiel:}
+{\bf Réponse :}
 
-Soit $L = (Q, \Sigma, \rho, q, F)$, construisons $L_2$ une copie de $L$.
+Puisque $L$ est régulier, alors $L$ peut être défini par un automate.
 
-$L_2 = (Q_2, \Sigma, \rho_2, q_2, F_2)$ 
+Soit $M = (Q, \Sigma, \rho, q, F)$, l'automate répondant au langage $L$, construisons $M_2$ une copie de $M$.
 
-Construisons $L_p$, un $\epsilon$-AFN comme suit:
+$M_2 = (Q_2, \Sigma, \rho_2, q_2, F_2)$ 
 
-$L_p = (Q', \Sigma, \rho', q, F_2)$ avec
+Construisons $M_p$, un $\epsilon$-AFN répondant un language $L_p$ comme suit:
+
+$M_p = (Q', \Sigma, \rho', q, F_2)$ avec
 \begin{itemize}
-\item $Q' = Q \cup Q_2 \cup {q'}$ où $q'$ est un nouvel état.
+\item $Q' = Q \cup Q_2$
 \item $\rho'=
 \rho \cup 
 \rho_2 \cup 
-\{(p, s, q'): p \in F \wedge s \in \Sigma  \} \cup
-\{(q', s, q_2): s \in \Sigma\}$ donc, 
-\\toutes les transitions de $L$ et $L_2$ 
-\\avec une transition de tous les symboles des états finaux de $L$ vers le nouvel état, 
-\\et du nouvel état vers l'état inital de $L_2$
+\{(p, s, r): p \in Q \wedge r \in Q_2 \wedge r$ est état copie de $p \wedge s \in \Sigma \}$
+\\toutes les transitions de $M$ et $M_2$ 
+\\avec une transition de tous les symboles entre les états "copie" de $M$ vers $M_2$
 \end{itemize}
 
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=1.5cm, semithick, show background rectangle]
@@ -391,7 +391,7 @@ $L_p = (Q', \Sigma, \rho', q, F_2)$ avec
   \node[state] (5) [above of=3] {};
   \node[accepting, state] (6) [below of=2] {};
   \node[state] (7) [below of=3] {};
-  \node[state] (8) [right of=7, draw=none] {$L$};
+  \node[state] (8) [right of=7, draw=none] {$M$};
 \end{tikzpicture}
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=1.5cm, semithick, show background rectangle]
   \tikzstyle{every state}=[draw=black,text=black]
@@ -402,9 +402,10 @@ $L_p = (Q', \Sigma, \rho', q, F_2)$ avec
   \node[state] (5) [above of=3] {};
   \node[accepting, state] (6) [below of=2] {};
   \node[state] (7) [below of=3] {};
-  \node[state] (8) [right of = 7, draw=none] {$L_2$};
+  \node[state] (8) [right of = 7, draw=none] {$M_2$};
 \end{tikzpicture}
 
+** Toutes les transitions montrées ici sont des transitions de type $\forall s \in \Sigma$
 
 \begin{tikzpicture}[->,shorten >=1pt, node distance=0.5, auto, semithick, show background rectangle]
   \tikzstyle{every state}=[draw=black,text=black]
@@ -416,38 +417,33 @@ $L_p = (Q', \Sigma, \rho', q, F_2)$ avec
   \node[state] (LN5) [above =of LN3] {};
   \node[state] (LN6) [below =of LN2] {};
   \node[state] (LN7) [below =of LN3] {};
-  \node (LN8) [right =of LN7, draw=none] {$L$};
+  \node (LN8) [right =of LN7, draw=none] {$M$};
   \node[fit=(LN1)(LN2)(LN3)(LN4)(LN5)(LN6)(LN7)(LN8),draw=black] (LBox) {};
 
-  %q
-  \node[state] (q) [right=of LBox] {$q'$};
-
   %L2
-  \node[state,node distance=2] (L2N1) [right =of q] {$q_2$};
+  \node[state,node distance=1] (L2N1) [right =of LBox] {$q_2$};
   \node[state] (L2N2) [right =of L2N1] {};
   \node[state] (L2N3) [right =of L2N2] {};
   \node[accepting, state] (L2N4) [above =of L2N2] {};
   \node[state] (L2N5) [above =of L2N3] {};
   \node[accepting, state] (L2N6) [below =of L2N2] {};
   \node[state] (L2N7) [below =of L2N3] {};
-  \node(L2N8) [right =of L2N7, draw=none] {$L_2$};
+  \node(L2N8) [right =of L2N7, draw=none] {$M_2$};
   \node[fit=(L2N1)(L2N2)(L2N3)(L2N4)(L2N5)(L2N6)(L2N7)(L2N8),draw=black] (L2Box) {};
 
 
-  \node (1) [right = of L2Box.south east, draw=none] {$L_p$};
+  \node (1) [right = of L2Box.south east, draw=none] {$M_p$};
 
   \path
-    (LN4) edge[bend left = 55] node {$\forall s \in \Sigma$} (q)
-    (LN6) edge[bend right = 55, below] node {$\forall s \in \Sigma$} (q)
-    (q) edge node {$\forall s \in \Sigma$} (L2N1)
+    (LN1) edge[bend left = 25] node {} (L2N1)
+    (LN2) edge[bend left = 25] node {} (L2N2)
+    (LN3) edge[bend left = 25] node {} (L2N3)
+    (LN4) edge[bend left = 25] node {} (L2N4)
+    (LN5) edge[bend left = 25] node {} (L2N5)
+    (LN6) edge[bend right = 25] node {} (L2N6)
+    (LN7) edge[bend right = 25] node {} (L2N7)
   ;
-
-
-;
 \end{tikzpicture}
-
-
-
 
 \bigskip
 \newpage
