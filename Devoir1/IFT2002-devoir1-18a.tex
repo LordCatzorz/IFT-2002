@@ -7,6 +7,8 @@
 \usetikzlibrary{fit, positioning}
 \usetikzlibrary{automata,backgrounds,snakes}
 \usepackage[framemethod=tikz]{mdframed}
+\usepackage{xstring, xifthen}
+
 
 %SPECIAL SYMBOLS
 
@@ -152,6 +154,34 @@
 \newcommand{\qsixf}{{\scriptsize \left[\begin{array}{c} 1 \\ 0\\ 1 \end{array}\right]}}
 \newcommand{\qsixg}{{\scriptsize \left[\begin{array}{c} 1 \\ 1\\ 0 \end{array}\right]}}
 \newcommand{\qsixh}{{\scriptsize \left[\begin{array}{c} 1 \\ 1\\ 1 \end{array}\right]}}
+
+%Modification de l'AFNG
+\newcommand{\addp}[1]{
+  \def\mystr{#1}
+  \StrLen{\mystr}[\mystrlen]
+  \ifthenelse{\mystrlen > 1}{(#1)}{#1}}
+
+\newcommand{\addu}[1]{
+  \def\mystr{#1}
+  \StrLen{\mystr}[\mystrlen]
+  \ifthenelse{\mystrlen > 0}{#1 \cup }{}}
+
+\newcommand{\addf}[1]{
+  \def\mystr{#1}
+  \StrLen{\mystr}[\mystrlen]
+  \ifthenelse{\mystrlen > 0}{\addp {#1}^* }{}}
+
+%1 = Etat 1
+%2 = Etat 2
+%3 = Etat 3
+%4 = transition 1 -> 2
+%5 = transition 2 -> 3
+%6 = transition 2 -> 2
+%7 = transition 1 -> 3
+\newcommand{\mAFNG}[7]{Nous allons perdre la transition 
+$#1 \xrightarrow{#4} #2 \xrightarrow{#5} #3$. 
+Il faut donc rajouter la transition 
+$#1 \xrightarrow{\addu{#7} \addp{#4}\addf{#6}\addp{#5}} #3$ }  
 
 \usepackage[latin1]{inputenc} % entree 8 bits iso-latin1
 \usepackage[T1]{fontenc}      % encodage 8 bits des fontes utilisees
@@ -487,38 +517,91 @@ Si vous donnez votre réponse sous la forme d'un automate, vous pouvez omettre l'
 \end{tikzpicture}
 
 \bigskip
-
+\newpage
 \noindent {\bf Question 7.}
 
 Donnez une expression régulière qui représente le langage accepté par l'automate ci-dessous. Donnez les étapes intermédiaires (c'est pour votre bien et celui de mon correcteur).
 
 \begin{figure}[thb]
 \begin{center}
-\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm,
-                    semithick]
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm, semithick]
   \tikzstyle{every state}=[draw=black,text=black]
 
   \node[initial by arrow,state,initial text=] (1) {$1$};
   \node[state] (2) [right of=1] {2};
   \node[accepting,state] (3) [right of=2] {3};
 
-
   \path 
 		(1) edge [bend left] node {$a,b$} (2)
 		
 		(2) edge node {$a$} (3)
-		(2) edge  node  {$a$} (1)
-		
+    (2) edge  node  {$a$} (1)
+    
 		(3) edge [loop right] node {$a$} (3)
-		(3) edge [bend left]  node {$b$} (1)
+    (3) edge [bend left]  node {$b$} (1)
       ;
-
 \end{tikzpicture}
 \end{center}
 \end{figure}
 
-\bigskip
+{\bf Réponse partiel:}
 
+Débutons par construire un AFNG.
+
+\begin{tikzpicture}[->,shorten >=1pt, node distance=1.5, auto, semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[initial by arrow, state,initial text=] (q0) {$q_0$};
+  \node[state,initial text=] (1) [right =of q0] {$1$};
+  \node[state] (2) [right =of 1] {2};
+  \node[state] (3) [right =of 2] {3};
+  \node[accepting, state] (qacc) [right =of 3] {$q_{acc}$};
+
+  \path 
+    (q0) edge node {$\epsilon$} (1)
+		(1) edge [bend left] node {$a \cup b$} (2)
+		
+		(2) edge node {$a$} (3)
+    (2) edge node {$a$} (1)
+    
+		(3) edge [loop below] node {$a$} (3)
+    (3) edge [bend left] node {$b$} (1)
+    
+    (3) edge node {$\epsilon$} (qacc) 
+  ;
+\end{tikzpicture}
+\\Faisons disparaître l'état 2. 
+\\\mAFNG 1 2 3 {a \cup b} {a} {} {}
+\\\mAFNG 1 2 1 {a \cup b} {a} {} {}
+\\\\Nous obtenons cet AFNG
+
+\begin{tikzpicture}[->,shorten >=1pt, node distance=1.5, auto, semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[initial by arrow, state,initial text=] (q0) {$q_0$};
+  \node[state,initial text=] (1) [right =of q0] {$1$};
+  \node[state] (3) [right =of 1] {3};
+  \node[accepting, state] (qacc) [right =of 3] {$q_{acc}$};
+
+  \path 
+    (q0) edge node {$\epsilon$} (1)
+
+    (1) edge [loop above] node {$(a \cup b)a$} (1)
+    (1) edge [bend left] node {$(a \cup b)a$} (3)
+    
+		(3) edge [loop below] node {$a$} (3)
+    (3) edge [bend left] node {$b$} (1)
+    
+    (3) edge node {$\epsilon$} (qacc) 
+  ;
+\end{tikzpicture}
+\\Faisons disparaître l'état 3. 
+\\\mAFNG 1 3 1 {(a \cup b)a} {b} {a} {}
+\\\mAFNG 1 3 {q_{acc}} {(a \cup b)a} {\epsilon} {a} {}
+\\\\Nous obtenons cet AFNG
+
+\bigskip
+\newpage
 \noindent {\bf Question 8. (facultative)}
 
 
