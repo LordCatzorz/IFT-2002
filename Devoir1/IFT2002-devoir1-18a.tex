@@ -544,7 +544,7 @@ Donnez une expression régulière qui représente le langage accepté par l'automate
 \end{center}
 \end{figure}
 
-{\bf Réponse partiel:}
+{\bf Réponse:}
 
 Débutons par construire un AFNG.
 
@@ -553,8 +553,8 @@ Débutons par construire un AFNG.
 
   \node[initial by arrow, state,initial text=] (q0) {$q_0$};
   \node[state,initial text=] (1) [right =of q0] {$1$};
-  \node[state] (2) [right =of 1] {2};
-  \node[state] (3) [right =of 2] {3};
+  \node[state] (2) [right =of 1] {$2$};
+  \node[state] (3) [right =of 2] {$3$};
   \node[accepting, state] (qacc) [right =of 3] {$q_{acc}$};
 
   \path 
@@ -580,7 +580,7 @@ Débutons par construire un AFNG.
 
   \node[initial by arrow, state,initial text=] (q0) {$q_0$};
   \node[state,initial text=] (1) [right =of q0] {$1$};
-  \node[state] (3) [right =of 1] {3};
+  \node[state] (3) [right =of 1] {$3$};
   \node[accepting, state] (qacc) [right =of 3] {$q_{acc}$};
 
   \path 
@@ -589,7 +589,7 @@ Débutons par construire un AFNG.
     (1) edge [loop above] node {$(a \cup b)a$} (1)
     (1) edge [bend left] node {$(a \cup b)a$} (3)
     
-		(3) edge [loop below] node {$a$} (3)
+		(3) edge [loop above] node {$a$} (3)
     (3) edge [bend left] node {$b$} (1)
     
     (3) edge node {$\epsilon$} (qacc) 
@@ -599,6 +599,35 @@ Débutons par construire un AFNG.
 \\\mAFNG 1 3 1 {(a \cup b)a} {b} {a} {}
 \\\mAFNG 1 3 {q_{acc}} {(a \cup b)a} {\epsilon} {a} {}
 \\\\Nous obtenons cet AFNG
+
+\begin{tikzpicture}[->,shorten >=1pt, node distance=1.5, auto, semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[initial by arrow, state,initial text=] (q0) {$q_0$};
+  \node[state,initial text=] (1) [right =of q0] {$1$};
+  \node[accepting, state, node distance=2.5] (qacc) [ right =of 1] {$q_{acc}$};
+
+  \path 
+    (q0) edge node {$\epsilon$} (1)
+
+    (1) edge [loop above] node {$((a \cup b)a \cup ((a \cup b)aa^*b))$} (1)
+    (1) edge node {$(a \cup b)aa^*$} (qacc)
+  ;
+\end{tikzpicture}
+\\Faisons disparaître l'état 3. 
+\\\mAFNG {q_0} 1 {q_{acc}} {\epsilon} {(a \cup b)aa*} {(a \cup b)a} {}
+\\\\Nous obtenons cet AFNG
+
+\begin{tikzpicture}[->,shorten >=1pt, node distance=1.5, auto, semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+
+  \node[initial by arrow, state,initial text=] (q0) {$q_0$};
+  \node[accepting, state, node distance=4.5] (qacc) [right =of 1] {$q_{acc}$};
+
+  \path 
+    (q0) edge node {$((a \cup b)a \cup ((a \cup b)aa^*b))^*(a \cup b)aa^*$} (qacc)
+  ;
+\end{tikzpicture}
 
 \bigskip
 \newpage
