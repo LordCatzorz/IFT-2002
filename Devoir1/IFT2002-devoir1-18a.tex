@@ -439,7 +439,7 @@ $M_p = (Q', \Sigma, \rho', q, F_2)$ avec
 
 \begin{tikzpicture}[->,shorten >=1pt, node distance=0.5, auto, semithick, show background rectangle]
   \tikzstyle{every state}=[draw=black,text=black]
-  %L
+  %M
   \node[initial above,state,initial text=] (LN1) {$q$};
   \node[state] (LN2) [right =of LN1] {};
   \node[state] (LN3) [right =of LN2] {};
@@ -450,7 +450,7 @@ $M_p = (Q', \Sigma, \rho', q, F_2)$ avec
   \node (LN8) [right =of LN7, draw=none] {$M$};
   \node[fit=(LN1)(LN2)(LN3)(LN4)(LN5)(LN6)(LN7)(LN8),draw=black] (LBox) {};
 
-  %L2
+  %M_2
   \node[state,node distance=1] (L2N1) [right =of LBox] {$q_2$};
   \node[state] (L2N2) [right =of L2N1] {};
   \node[state] (L2N3) [right =of L2N2] {};
@@ -474,6 +474,16 @@ $M_p = (Q', \Sigma, \rho', q, F_2)$ avec
     (LN7) edge[bend right = 25] node {} (L2N7)
   ;
 \end{tikzpicture}
+
+\bigskip
+\noindent Que ce passe-t-il dans cet automate?
+\\\noindent Remarquons que les états acceptants se trouve tous dans $M_2$ et qu'il n'y a aucune transition qui commence de $M_2$
+pour se rendre à $M$. De plus, toutes les transitions de $M$ à $M_2$ sont sur des noeuds "Clones" et qu'ils sont valides
+pour tous les symboles de de l'alphabet $\Sigma$. Ceci à pour effet qu'à chaque lecture d'un symbole à partir d'un noeud de $M$, 
+on se trouve sur le même état, mais dans $M_2$. Nous avons donc réussi à omettre un symbole. De plus, il n'est plus possible d'omettre
+de nouveaux symboles, puisque qu'il n'y a plus de transition "maison" de disponible (il commence tous de noeuds de $M$).
+Finalement, remarquons que si nous lisons aucun symbole ($\epsilon$), nous sommes forcément dans un noeud de $M$ et donc, nous
+sommes certains de ne pas être dans un état acceptant.
 
 \bigskip
 \newpage
