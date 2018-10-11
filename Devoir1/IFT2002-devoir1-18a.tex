@@ -369,10 +369,10 @@ Plus pécisément, il existe $w = xyz$ tel que
 Puisque $|xy| \leq p$ et puisque les $p$ premiers symboles de $w$ sont des $0$, on sait que $y$ ne contient que des $0$.
 
 \noindent 
-On ne sait pas combien de $0$ sont contenus dans $y$, mais on sait qu'il en a $a$ pour un certain $a$ compris entre $1$ et $p$.
+On ne sait pas combien de $0$ sont contenus dans $y$, mais on sait qu'il en a $j$ pour un certain $j$ compris entre $1$ et $p$.
 
 \noindent
-Prenons $i = 3$. On a $xy^2z = xyyz = 0^{p+a}10^p10^p$. Ce mot ne fait pas partie du language, puisque $a > 0$ et que $p+a > p$ alors que le mot doit finir avec le nombre de $0$ le plus nombreux ($0^{p+a}$ dans ce cas), mais il fini avec $0^p$.
+Prenons $i = 3$. On a $xy^3z = xyyyz = 0^{p+j}10^p10^p$. Ce mot ne fait pas partie du language, puisque $j > 0$ et que $p+j > p$ alors que le mot doit finir avec le nombre de $0$ le plus nombreux ($0^{p+j}$ dans ce cas), mais il fini avec $0^p$.
 
 \noindent
 $K$ n'est donc pas régulier.
@@ -647,5 +647,60 @@ Débutons par construire un AFNG.
 Soit $L$ un langage sur l'alphabet $\{a,b\}$. Définissons $K$ sur ce même alphabet par $K = \{x | xx \in L\}$. Montrez que si $L$ est régulier alors $K$ est aussi régulier.
 
 (Les bonnes idées qui ne marchent pas tout à fait seront récompensées!)
+
+{\bf Réponse:} Comment éviter les boucles dans un automate???
+
+\noindent
+Je ne réussi pas à prouver par le lemme de pompage que $K$ n'est pas régulier.
+
+\noindent
+\\Cependant, je ne vois pas comment je suis capable de dupliquer un automate, 
+puisque s'il y a une boucle dans l'automate, la boucle doit se reproduire exactement dans 
+la 2e copie du mot. Ceci me semble impossible à moins d'avoir une quantité infinie d'états.
+
+\noindent
+La façon de le dire qui pourrait ressembler le plus à une solution est là suivante:
+
+Pour chaque transition de $M$, l'automate de $L$, faire un produit synchrone avec une copie de l'automate ne contenant que les transitions déjà réalisées.
+
+\noindent
+\\En tous cas, voici la démarche pour prouver que $K$ est irrégulier, même si elle ne prouve rien.
+
+
+\noindent
+\\Supposons que $K$ est régulier. Il satisfait donc le lemme de pompage pour une certaine longueur de pompage $p > 0$.
+
+\noindent
+\\Supposons que $L$ est le langage de tous les mots de l'alphabet ${a,b}$ défini par $(a \cup b)^*$.
+
+\noindent
+\\Quel que soit $p$, considérons le mot $w=a^pb^p$. Ce mot est de longueur 2$p$ et appartient à $K$ donc il peut être "pompé".
+
+$ww \in L$
+
+\noindent
+Plus pécisément, il existe $w = xyz$ tel que
+\begin{enumerate}
+  \item $|xy| \leq p$
+  \item $|y| > 0$
+  \item $xy^iz \in K$ pour tout $i \in {\mathbb N}$.
+\end{enumerate}
+
+\noindent
+Puisque $|xy| \leq p$ et puisque les $p$ premiers symboles de $w$ sont des $a$, on sait que $y$ ne contient que des $a$.
+
+\noindent 
+On ne sait pas combien de $a$ sont contenus dans $y$, mais on sait qu'il en a $j$ pour un certain $j$ compris entre $1$ et $p$.
+
+\noindent
+Prenons $i = 3$. On a $xy^3z = xyyyz = a^{p+j}b^pa^pb^p$. 
+Ce mot fait bien parti du langage, car $xyyyzxyyyz \in L$ 
+
+\noindent
+$K$ n'est donc pas prouvé irrégulier.
+
+\noindent
+Si on se donne un $L$ tel qu'il est impossible de $xx \in L$. (Par exemple, $L = a$), alors l'automate suivant pourra répondre pour $K$: $a \cap b$. Ce qui ne montre pas que $K$ n'est pas régulier.
+
 
 \end{document}
