@@ -1,0 +1,276 @@
+\documentclass[12pt]{article}
+
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+
+
+%SPECIAL SYMBOLS
+
+\newcommand{\CSP}{{\rm CSP}}
+\newcommand{\nin}{\not\in}         % Not in set
+\newcommand{\DA}{{\bf DA }}    % Variety DA
+\newcommand{\then}{\rightarrow}    % Implication arrow
+\newcommand{\into}{\rightarrow}    % Function arrow
+\newcommand{\xbar}{\overline{x}}   % x with an bar on top
+\newcommand{\Xbar}{\overline{X}}   % X with an bar on top
+\newcommand{\ybar}{\overline{y}}   % y with an bar on top
+\newcommand{\abar}{\overline{a}}   % a with an bar on top
+\newcommand{\EQN}{{\rm EQN}}
+\newcommand{\TEQN}{{\rm T\!-\!EQN}}
+\newcommand{\rl}{{\bf R}_1 \vee {\bf L}_1}
+%\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\back}{$\backslash$}
+\renewcommand{\choose}[2]{\genfrac{(}{)}{0pt}{}{#1}{#2}}
+\newcommand{\xor}{\oplus}
+\newcommand{\symm}{\sim}
+
+\newcommand{\dmd}{% diamond
+  {\qbezier(0,0)(0.5,0.5)(1,1)
+   \qbezier(0,0)(-0.5,0.5)(-1,1)
+   \qbezier(0,2)(0.5,1.5)(1,1)
+   \qbezier(0,2)(-0.5,1.5)(-1,1)}}
+
+\newcommand{\dmdplus}{% diamond with + inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(0,0.5){\line(0,1){1}}
+      \put(-0.5,1){\line(1,0){1}}
+    \end{picture}}}
+
+\newcommand{\dmdminus}{% diamond with - inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(-0.5,1){\line(1,0){1}}
+    \end{picture}}}
+
+\newcommand{\dmdplusminus}{% diamond with +/- inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(0,0.8){\line(0,1){0.8}}
+      \put(-0.4,1.2){\line(1,0){0.8}}
+      \put(-0.4,0.6){\line(1,0){0.8}}
+     \end{picture}}}
+
+
+\usepackage{tikz,tikz-qtree}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata,backgrounds,snakes}
+
+%SHORTCUTS FOR MATHCAL
+
+\newcommand{\cH}{\mathcal{ H}}
+\newcommand{\cC}{\mathcal{ C}}
+\newcommand{\cJ}{\mathcal{ J}}
+\newcommand{\cM}{\mathcal{ M}}
+\newcommand{\cL}{\mathcal{ L}}
+\newcommand{\cR}{\mathcal{ R}}
+\newcommand{\cP}{\mathcal{ P}}
+\newcommand{\cQ}{\mathcal{ Q}}
+
+\newcommand{\Pol}{{\rm Pol}}
+
+
+\newcommand{\maps}\longrightarrow
+\newcommand{\cmaps}\Longrightarrow
+\newcommand{\vocab}{\tau}
+\newcommand{\uest}{\operatorname{{\bf U}}}
+\newcommand{\nest}{\operatorname{{\bf N}}}
+\newcommand{\mest}{\operatorname{{\bf M}}}
+\newcommand{\pest}{\operatorname{{\bf P}}}
+\newcommand{\test}{\operatorname{{\bf T}}}
+\newcommand{\sest}{\operatorname{{\bf S}}}
+\newcommand{\dest}{\operatorname{{\bf D}}}
+\newcommand{\cest}{\operatorname{{\bf C}}}
+\newcommand{\best}{\operatorname{{\bf B}}}
+\newcommand{\aest}{\operatorname{{\bf A}}}
+\newcommand{\kest}{\operatorname{{\bf K}}}
+\newcommand{\hest}{\operatorname{{\bf H}}}
+\newcommand{\gest}{\operatorname{{\bf G}}}
+\newcommand{\csp}{\operatorname{CSP}}
+\newcommand{\tcsp}{\operatorname{TCSP}}
+\newcommand{\tpol}{\operatorname{TPol}}
+\newcommand{\ext}{\operatorname{ext}}
+\newcommand{\set}[1]{\overline{#1}}
+\newcommand{\atomic}{\operatorname{{\mathcal A}}}
+\newcommand{\atomicsent}{\operatorname{{\mathcal B}}}
+\newcommand{\composed}{\circ}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\atom}{\alpha}
+\newcommand{\atomsent}{\beta}
+\newcommand{\sent}{\operatorname{sent}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\ide}{\operatorname{id}}
+\newcommand{\testfixed}{\operatorname{{\mathcal TK}}}
+\newcommand{\diagram}[1]{{#1}^*}
+\newcommand{\sub}{\subseteq}
+
+
+\newcommand{\arity}{\rho}
+\newcommand{\rsymbol}{\operatorname{r}}
+
+
+\newcommand{\imply}[2]{{\bf (#1)$\rightarrow$(#2)}}
+\newcommand{\twoimply}[2]{{\bf (#1)$\leftrightarrow$(#2)}}
+
+
+\newcommand{\dset}{\operatorname{DS}}
+\newcommand{\one}{{\bf 1}}
+\newcommand{\origin}{\operatorname{{\mathcal O}}}
+\newcommand{\image}{\operatorname{{\mathcal I}}}
+\newcommand{\types}{\operatorname{{\mathcal T}}}
+\newcommand{\rel}{\operatorname{rel}}
+\newcommand{\maj}{\operatorname{MAJ}}
+
+\newcommand{\sat}{\operatorname{SAT}}
+
+\newcommand{\pointnolinear}{K_1}
+
+
+\newcommand{\mcd}{\operatorname{gcd}}
+
+
+\newcommand{\NP}{{\rm NP}}
+\newcommand{\coNP}{{\rm co-NP}}
+
+
+
+%\newcommand{\bbbz}{{\mathbb Z}}
+\newcommand{\block}{\square}
+\newcommand{\ul}{\underline}
+
+
+\usepackage[latin1]{inputenc} % entree 8 bits iso-latin1
+\usepackage[T1]{fontenc}      % encodage 8 bits des fontes utilisees
+
+
+\topmargin -1.1in 
+\textheight 9.7in
+\setlength{\textwidth}{7.1in}
+\oddsidemargin = -.3in
+
+\begin{document}
+
+\smallskip
+\begin{center}
+\large \bf IFT-2002 Informatique Théorique \\ Devoir 2
+\end{center}
+
+\hfill 
+
+
+
+\bigskip
+
+\noindent {\bf Question 1.}
+
+Montrez que les langages ci-dessous sont non-contextuels. Vous pouvez le faire soit en donnant une grammaire non-contextuelle qui génère le langage, soit un automate à pile qui accepte le langage. (Notez que si vous donnez une grammaire et un automate, les deux seront corrigés mais seul le premier des deux sera noté)
+
+
+\begin{enumerate}
+\item
+$L = \{u b a^n b a^n b v : n \in {\mathbb N} \wedge u,v \in \{a,b\}^* \}.$
+
+\item
+Soit $K$ l'ensemble des mots de la forme $x \$ y$ où $x$ et $y$ sont des mots de longueur impaire sur l'alphabet $\{a,b\}$ et la lettre médiane de $x$ est égale à la lettre médiane de $y$. Par exemple $abb\$b$ et $aaaaa \$ bab$ sont des mots dans $K$ mais $aa \$aaa$ n'est pas dans $K$ (le mot à gauche est de longueur paire), $aaa\$aab\$ $ n'est pas dans $K$ (pas de la forme  $x \$ y$) et $aba \$ abaab$ n'est pas dans $K$ (pas la même lettre médiane). 
+\end{enumerate}
+
+
+\bigskip
+
+\noindent {\bf Question 2.}
+
+Montrez que le langage suivant est non-contextuel. ({\em Je pense qu'il est plus facile de construire un automate à pile pour ce langage plutôt que de fournir une grammaire non-contextuelle mais vous pouvez faire l'un ou l'autre.})
+
+\smallskip 
+$T = \{x \$ y^r : x$ est la représentation en binaire d'un entier $n_x$ et $y$ représente l'entier $n_x + 1\}$ 
+
+
+\noindent
+Rappelons que $y^r$ est le mot $y$ renversé.
+Par exemple $10010 \$ 11001 \in T$ parce que $10010$ représente l'entier $18$ et que le renversé du mot qui suit le \$ est 10011 qui représente l'entier $19$. De la même façon $11011\$ 00111$ est dans le langage puisque $11011$ représente $27$ et $11100$ représente $28$.
+
+
+\bigskip
+\bigskip
+
+\noindent {\bf Question 3.}
+
+
+Considérez l'automate à pile suivant:
+
+\bigskip
+
+\hspace{-.2in}
+\epsfig{file=aut30.pdf, width=5in}
+\bigskip
+
+\noindent
+a) Dites si les séquences suivantes sont acceptées par l'automate à pile ci-dessus: $ab$, $acc$, $aac$, $aaacb$.
+
+\noindent
+b) Décrivez le langage accepté par cet automate. (Par une expression ensembliste ou de toute autre façon qui est suffisamment claire et précise pour que le correcteur vous comprenne)
+
+\noindent
+c) Donnez une grammaire non-contextuelle qui génère le même langage.
+
+\newpage
+
+\noindent {\bf Question 4.}
+
+\bigskip
+Considérez la grammaire $G$ donnée par les règles ci-dessous. (L'alphabet terminal est $\{a,b,c\}$.)
+
+
+\smallskip
+\noindent
+$S \rightarrow abPR$; \; $S \rightarrow QTba$; \\ 
+$P \rightarrow abPR$; \; $P \rightarrow c$; \\
+$T \rightarrow QTba$;  \; $T \rightarrow c$; \\
+$R \rightarrow Ra$;  \; $R \rightarrow ba$; \\
+$Q \rightarrow Qb$;  \; $Q \rightarrow ab$; 
+
+\bigskip
+
+\noindent
+a) 
+Décrivez le langage généré par cette grammaire. (Par une expression ensembliste ou de toute autre façon qui est suffisamment claire et précise pour que le correcteur vous comprenne. Je suggère d'illustrer votre explication avec quelques exemples bien choisis de séquences qui appartiennent au langage et de séquences qui n'appartiennent pas au langage)
+
+\smallskip 
+
+\noindent
+b) Montrez que $G$ est ambigüe en donnant deux arbres de dérivation distincts pour un même mot.
+
+
+
+\bigskip
+
+\noindent {\bf Question 5.}
+
+\noindent
+Utilisez le lemme de pompage pour les langages non-contextuels pour montrer que le langage suivant n'est pas non-contextuel.
+
+$L = \{a^\ell b^n c^m | \ell, n, m \in {\mathbb N} \wedge \ell < n < m\}$
+
+
+\bigskip
+\noindent {\bf Question facultative}
+
+Soit $\{a,b\}$ un alphabet et définissons la relation $\symm$ sur les mots de  $\{a,b\}^*$ par $x \symm y$ si $x$ et $y$ ont le même nombre de $a$ et ont le même nombre de $b$. Par exemple $abaa \symm baaa$ et $ababb \symm bbaab$. Si $L$ est un langage sur $\{a,b\}^*$ on peut maintenant définir
+$$K_L = \{x : \exists y\;  x \symm y \wedge y \in L \}.$$
+Donc un mot $x$ appartient à $K_L$ si ses lettres peuvent être réordonnées pour former un mot de $L$.
+
+\begin{enumerate}
+\item
+Donnez un exemple de langage régulier $L$ tel que $K_L$ n'est pas régulier.
+\item 
+Montrez que si $L$ est un langage régulier alors le langage $K_L$ est toujours non-contextuel. 
+\item
+Montrez si l'alphabet est maintenant $\{a,b,c\}$ alors on peut trouver un langage régulier $L$ tel que $K_L$ n'est pas non-contextuel. (Évidemment, on ajuste la définition de $\symm$, c'est-à-dire $x \symm y$ si $x$ et $y$ ont le même nombre de $a$, le même nombre de $b$ et le même nombre de $c$.)
+\end{enumerate}
+
+\end{document}
