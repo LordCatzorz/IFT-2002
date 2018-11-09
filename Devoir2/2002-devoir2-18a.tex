@@ -303,7 +303,7 @@ a)
 \noindent b)
 
 \noindent
-C'est le langage débutat par une série de $a$ et suivi par des $b$ et/ou $c$. 
+C'est le langage débutant par une série de $a$ et suivi par des $b$ et/ou $c$. 
 Le nombre de $a$ est égal est égal au nombre de $b$ plus deux fois le nombre de $c$.
 
 \bigskip
@@ -311,8 +311,6 @@ Le nombre de $a$ est égal est égal au nombre de $b$ plus deux fois le nombre de 
 
 \noindent
 $S \rightarrow aaSc$; \; $S \rightarrow aSb$;  \; $S \rightarrow \epsilon$; \\
-
-
 
 
 \newpage
@@ -342,10 +340,40 @@ Décrivez le langage généré par cette grammaire. (Par une expression ensembliste 
 \noindent
 b) Montrez que $G$ est ambigüe en donnant deux arbres de dérivation distincts pour un même mot.
 
+{\bf Réponse:}
+
+a)
+
+$\{$
+$\{(ab)^ic(x)^i | x = ba^j \wedge i \in {\mathbb N} \wedge j \in {\mathbb N}\}$
+$\cup$
+$\{(x)^ic(ba)^i | x = ab^j \wedge i \in {\mathbb N} \wedge j \in {\mathbb N}\}$
+$\}$
+C'est un langage dont le mot peut avoir deux formes:
+
+1) débutant par une suite de $ab$ suivi d'un $c$ suivi d'autant de groupe ayant la forme $ba^n$ avec $n > 0$
+
+2) finissant par une suite de $ba$ précédé d'un $c$ précédé d'autant de groupe ayant la forme $ab^n$ avec $n > 0$
+
+Mots acceptés par la forme 1:
+$abcba$,
+$abcbaa$,
+$ababcbaaba$
+
+Mots acceptés par la forme 2:
+$abcba$,
+$abbcba$,
+$ababbcbaba$
+
+Mots refusées:
+$abbcbba$
+$aabcbba$
+
+
 
 
 \bigskip
-
+\newpage
 \noindent {\bf Question 5.}
 
 \noindent
