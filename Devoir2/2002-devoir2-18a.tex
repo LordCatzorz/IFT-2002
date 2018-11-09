@@ -339,21 +339,27 @@ Décrivez le langage généré par cette grammaire. (Par une expression ensembliste 
 
 \noindent
 b) Montrez que $G$ est ambigüe en donnant deux arbres de dérivation distincts pour un même mot.
+\bigskip
 
-{\bf Réponse:}
+\noindent
+{\bf Réponse: a)}
 
-a)
-
+\noindent
 $\{$
 $\{(ab)^ic(x)^i | x = ba^j \wedge i \in {\mathbb N} \wedge j \in {\mathbb N}\}$
 $\cup$
 $\{(x)^ic(ba)^i | x = ab^j \wedge i \in {\mathbb N} \wedge j \in {\mathbb N}\}$
 $\}$
+
+\noindent
 C'est un langage dont le mot peut avoir deux formes:
 
-1) débutant par une suite de $ab$ suivi d'un $c$ suivi d'autant de groupe ayant la forme $ba^n$ avec $n > 0$
+\noindent
+1) débutant par une suite de $ab$ suivie d'un $c$ suivi d'autant de groupe ayant la forme $ba^n \wedge n > 0$
 
-2) finissant par une suite de $ba$ précédé d'un $c$ précédé d'autant de groupe ayant la forme $ab^n$ avec $n > 0$
+\noindent
+2) finissant par une suite de $ba$ précédée d'un $c$ précédé d'autant de groupe ayant la forme $ab^n \wedge n > 0$
+\bigskip
 
 Mots acceptés par la forme 1:
 $abcba$,
@@ -368,7 +374,15 @@ $ababbcbaba$
 Mots refusées:
 $abbcbba$
 $aabcbba$
+\bigskip
 
+\noindent
+{\bf Réponse: b)}
+
+$ S \Rightarrow abPR \Rightarrow abcR \Rightarrow abcba $
+
+
+$ S \Rightarrow QTba \Rightarrow abTba \Rightarrow abcba $
 
 
 
