@@ -228,6 +228,8 @@ $T = \{x \$ y^r : x$ est la représentation en binaire d'un entier $n_x$ et $y$ r
 Rappelons que $y^r$ est le mot $y$ renversé.
 Par exemple $10010 \$ 11001 \in T$ parce que $10010$ représente l'entier $18$ et que le renversé du mot qui suit le \$ est 10011 qui représente l'entier $19$. De la même façon $11011\$ 00111$ est dans le langage puisque $11011$ représente $27$ et $11100$ représente $28$.
 
+\bigskip
+
 {\bf Réponse:}
 
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm, semithick]
@@ -285,6 +287,7 @@ b) Décrivez le langage accepté par cet automate. (Par une expression ensembliste
 \noindent
 c) Donnez une grammaire non-contextuelle qui génère le même langage.
 
+\bigskip
 
 {\bf Réponse:}
 
@@ -395,7 +398,65 @@ Utilisez le lemme de pompage pour les langages non-contextuels pour montrer que 
 
 $L = \{a^\ell b^n c^m | \ell, n, m \in {\mathbb N} \wedge \ell < n < m\}$
 
+\bigskip
 
+{\bf Réponse:}
+
+Montrons que $L$ n'est pas non-contextuel. 
+Il satisfait donc le corrolaire de pompage pour tout $p > 0$.
+\bigskip
+
+Quel que soit $p$, considérons le mot $z = a^pb^{p+1}c^{p+2}$. Ce mot est de longeur $3p+3$ et appartient à $L$ il devraut donc être "pompé".
+\bigskip
+
+Plus précisément, il existe $z = svuwt$ avec $|vw| \geq 1$ et $|vuw| \leq p$ et $\{\forall i | sv^iuw^it \in L\}$
+\bigskip
+
+Il reste à montrer qu'en fait, peut importe le découpage, il existe un i tel que $sv^iuw^it \notin L$
+\bigskip
+
+1) $v$ contient des $a$
+
+Donc $uw$ ne peut pas contenir de $c$ car sinon $|vuw| > p$. Alors $sv^5uw^5t$ n'est pas dans le langage, car il y aura plus de $a$ que de $c$ 
+\bigskip
+
+2) $v$ contient des $b$ mais pas de $a$
+
+Alors aucun $a$ est pompable et $sv^0uw^0t$ n'est plus dans le langage, car l'on enlève au moins un $b$ et le nombre de $a$ sera plus grand ou égal au nombre de $b$
+\bigskip
+
+3) $v$ contient des $c$ mais pas de $b$
+
+Alors aucun $b$ est pompable et $sv^0uw^0t$ n'est plus dans le langage, car l'on enlève au moins un $c$ et le nombre de $b$ sera plus grand ou égal au nombre de $c$
+\bigskip
+
+4) Puisque $v$ \\
+Ne peut contenir de $c$ sans contenir de $b$(3)\\
+Ne peut contenir de $b$ sans contenir de $a$(2)\\
+Ne peut contenir de $a$
+
+alors $v = \epsilon$.
+
+\bigskip
+
+5) $w$ contient des $c$ mais pas de $b$
+
+Alors aucun $b$ est pompable puisque $v = \epsilon$(4) et $sv^0uw^0t$ n'est plus dans le langage, car l'on enlève au moins un $c$ et le nombre de $b$ sera plus grand ou égal au nombre de $c$
+\bigskip
+
+6) $w$ contient des $b$ mais pas de $a$
+
+Alors aucun $a$ est pompable puisque $v = \epsilon$(4) et $sv^0uw^0t$ n'est plus dans le langage, car l'on enlève au moins un $b$ et le nombre de $a$ sera plus grand ou égal au nombre de $b$
+\bigskip
+
+7) $w$ contient des $a$
+
+
+
+
+
+
+\newpage
 \bigskip
 \noindent {\bf Question facultative}
 
