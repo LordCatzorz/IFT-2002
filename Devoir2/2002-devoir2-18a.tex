@@ -181,13 +181,13 @@ Soit $K$ l'ensemble des mots de la forme $x \$ y$ où $x$ et $y$ sont des mots de
 
 {\bf Réponse 1:}
 
-\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm, semithick]
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm, semithick]
   \tikzstyle{every state}=[draw=black,text=black]
   
   \node[initial by arrow,state,initial text=] (1) {1};
-  \node[state] (2) [right of=1] {2};
-  \node[state] (3) [right of=2] {3};
-  \node[accepting, state] (4) [right of=3] {4};
+  \node[state] (2) [right =of 1] {2};
+  \node[state] (3) [right =of 2] {3};
+  \node[accepting, state] (4) [right =of 3] {4};
   
   \path
   
@@ -223,6 +223,38 @@ $T = \{x \$ y^r : x$ est la représentation en binaire d'un entier $n_x$ et $y$ r
 \noindent
 Rappelons que $y^r$ est le mot $y$ renversé.
 Par exemple $10010 \$ 11001 \in T$ parce que $10010$ représente l'entier $18$ et que le renversé du mot qui suit le \$ est 10011 qui représente l'entier $19$. De la même façon $11011\$ 00111$ est dans le langage puisque $11011$ représente $27$ et $11100$ représente $28$.
+
+{\bf Réponse:}
+
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm, semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+  
+  \node[initial by arrow,state,initial text=] (0) {0};
+  \node[state] (1) [right =of 0] {1};
+  \node[state] (2) [right =of 1] {2};
+  \node[state] (3) [above right =of 2] {3};
+  \node[state] (4) [below right =of 3] {4};
+  \node[state] (5) [above right =of 4] {5};
+  \node[accepting, state] (6) [below right =of 5] {6};
+  
+  \path
+  (0) edge node {$\epsilon,\epsilon;\#$} (1)
+  (1) edge[loop above] node {$0, \epsilon; 0$} (1)
+  (1) edge[loop below] node {$1, \epsilon; 1$} (1)
+  (1) edge node {$\$, \epsilon; \epsilon$} (2)
+  (2) edge node {$0, 1; \epsilon $} (3)
+  (2) edge node {$1, 0; \epsilon $} (4)
+  (3) edge[loop left] node {$0, 1; \epsilon $} (3)
+  (3) edge node {$1, 0; \epsilon $} (4)
+  (3) edge node {$1, \epsilon; \epsilon $} (5)
+
+  (4) edge[loop below, align=center] node {$0, 0; \epsilon$\\$1, 1; \epsilon $} (4)
+
+  (4) edge node {$\epsilon, \#; \epsilon $} (6)
+  (5) edge node {$\epsilon, \#; \epsilon $} (6)
+  ;
+
+\end{tikzpicture}
 
 
 \bigskip
