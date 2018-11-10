@@ -433,7 +433,7 @@ Alors aucun $b$ est pompable et $sv^0uw^0t$ n'est plus dans le langage, car l'on
 4) Puisque $v$ \\
 Ne peut contenir de $c$ sans contenir de $b$(3)\\
 Ne peut contenir de $b$ sans contenir de $a$(2)\\
-Ne peut contenir de $a$
+Ne peut contenir de $a$(1)
 
 alors $v = \epsilon$.
 
@@ -450,6 +450,23 @@ Alors aucun $a$ est pompable puisque $v = \epsilon$(4) et $sv^0uw^0t$ n'est plus
 \bigskip
 
 7) $w$ contient des $a$
+Donc $w$ ne peut pas contenir de $c$ car sinon $|vuw| > p$. Alors $sv^5uw^5t$ n'est pas dans le langage, car il y aura plus de $a$ que de $c$ 
+\bigskip
+
+8) Puisque $w$ \\
+Ne peut contenir de $c$ sans contenir de $b$(5)\\
+Ne peut contenir de $b$ sans contenir de $a$(6)\\
+Ne peut contenir de $a$(7)
+
+alors $w = \epsilon$.
+\bigskip
+
+9) Nous avons que $v = \epsilon$ et $w = \epsilon$. Ceci est impossible car $|vw| > 1$
+\bigskip
+
+$L$ n'est pas non-contextuel.
+
+
 
 
 
@@ -467,6 +484,31 @@ Donc un mot $x$ appartient à $K_L$ si ses lettres peuvent être réordonnées pour 
 \begin{enumerate}
 \item
 Donnez un exemple de langage régulier $L$ tel que $K_L$ n'est pas régulier.
+
+{\bf Réponse:}
+
+$L=(ab)^*$ Le langage de suites de paires $ab$ (ex: $abababab$)
+
+Supposons que $K_L$ est régulier. Il satisfait donc le lemme de pompage pour une certaine longueur de pompage $p > 0$
+
+Quel que soit $p$, considérons le mot $w = a^pb^p$. Ce mot est de longeur $2p$ et appartient à $K_L$ donc il peut être "pompé".
+
+Plus précisément, il existe $w=xyz$ tel que
+\begin{enumerate}
+  \item $|xy| \leq p$
+  \item $|y| > 0$
+  \item $xy^iz \in K_L$ pour tout $i \in {\mathbb N}$.
+\end{enumerate}
+
+Puisque $|xy| \leq p$ et puisque les $p$ premiers symboles de $w$ sont des $a$, on sait que $y$ ne contient que des $a$.
+
+On ne sait pas combien de $a$ sont contenus dans $y$, mais on sait qu'il en a $j$ pour un certain $j$ compris entre $1$ et $p$.
+
+Prenons $i = 0$. On a $xy^0z = xz = a^{p-j}b^p$. Ce mot ne fait pas partie du language, puisque $j > 0$ et que $p-j \neq p$ alors que le mot doit avoir autant de $a$ et de $b$ pour être une série de $ab$ et appartenir à $L$.
+
+$K_L$ n'est pas régulier.
+
+
 \item 
 Montrez que si $L$ est un langage régulier alors le langage $K_L$ est toujours non-contextuel. 
 \item
