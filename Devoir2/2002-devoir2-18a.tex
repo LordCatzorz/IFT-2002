@@ -315,7 +315,6 @@ Le nombre de $a$ est égal est égal au nombre de $b$ plus deux fois le nombre de 
 \noindent
 $S \rightarrow aaSc$; \; $S \rightarrow aSb$;  \; $S \rightarrow \epsilon$; \\
 
-
 \newpage
 
 \noindent {\bf Question 4.}
@@ -384,9 +383,37 @@ $aabcbba$
 
 $ S \Rightarrow abPR \Rightarrow abcR \Rightarrow abcba $
 
+\begin{tikzpicture}[sibling distance=10em,
+  every node/.style = {draw=none, align=center}]
+  \node {S}
+    child { node {a} }
+    child { node {b} }
+    child { node {P} 
+      child { node {c}}
+      }
+    child { node {R} 
+      child { node {b} }
+      child { node {a} }
+      }
+; 
+\end{tikzpicture}
 
 $ S \Rightarrow QTba \Rightarrow abTba \Rightarrow abcba $
 
+\begin{tikzpicture}[sibling distance=10em,
+  every node/.style = {draw=none, align=center}]
+  \node {S}
+    child { node {Q} 
+      child { node {a} }
+      child { node {b} }
+      }
+    child { node {T} 
+      child { node {c}}
+      }
+    child { node {b} }
+    child { node {a} }
+; 
+\end{tikzpicture}
 
 
 \bigskip
