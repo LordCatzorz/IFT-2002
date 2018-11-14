@@ -384,16 +384,17 @@ $aabcbba$
 $ S \Rightarrow abPR \Rightarrow abcR \Rightarrow abcba $
 
 \begin{tikzpicture}[sibling distance=10em,
-  every node/.style = {draw=none, align=center}]
+  every node/.style = {draw=none, align=center},
+  terminal/.style = {circle, draw=black}]
   \node {S}
-    child { node {a} }
-    child { node {b} }
+    child { node [terminal] {a} }
+    child { node [terminal] {b} }
     child { node {P} 
-      child { node {c}}
+      child { node [terminal] {c}}
       }
     child { node {R} 
-      child { node {b} }
-      child { node {a} }
+      child { node [terminal] {b} }
+      child { node [terminal] {a} }
       }
 ; 
 \end{tikzpicture}
@@ -401,17 +402,18 @@ $ S \Rightarrow abPR \Rightarrow abcR \Rightarrow abcba $
 $ S \Rightarrow QTba \Rightarrow abTba \Rightarrow abcba $
 
 \begin{tikzpicture}[sibling distance=10em,
-  every node/.style = {draw=none, align=center}]
+  every node/.style = {draw=none, align=center},
+  terminal/.style = {circle, draw=black}]
   \node {S}
     child { node {Q} 
-      child { node {a} }
-      child { node {b} }
+      child { node [terminal] {a} }
+      child { node [terminal] {b} }
       }
     child { node {T} 
-      child { node {c}}
+      child { node [terminal] {c}}
       }
-    child { node {b} }
-    child { node {a} }
+    child { node [terminal] {b} }
+    child { node [terminal] {a} }
 ; 
 \end{tikzpicture}
 
