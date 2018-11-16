@@ -177,11 +177,7 @@ Montrez que les langages ci-dessous sont non-contextuels. Vous pouvez le faire s
 \item
 $L = \{u b a^n b a^n b v : n \in {\mathbb N} \wedge u,v \in \{a,b\}^* \}.$
 
-\item
-Soit $K$ l'ensemble des mots de la forme $x \$ y$ où $x$ et $y$ sont des mots de longueur impaire sur l'alphabet $\{a,b\}$ et la lettre médiane de $x$ est égale à la lettre médiane de $y$. Par exemple $abb\$b$ et $aaaaa \$ bab$ sont des mots dans $K$ mais $aa \$aaa$ n'est pas dans $K$ (le mot à gauche est de longueur paire), $aaa\$aab\$ $ n'est pas dans $K$ (pas de la forme  $x \$ y$) et $aba \$ abaab$ n'est pas dans $K$ (pas la même lettre médiane). 
-\end{enumerate}
-
-{\bf Réponse 1:}
+{\bf Réponse}
 
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm, semithick]
   \tikzstyle{every state}=[draw=black,text=black]
@@ -204,13 +200,17 @@ Soit $K$ l'ensemble des mots de la forme $x \$ y$ où $x$ et $y$ sont des mots de
 
 \end{tikzpicture}
   
-{\bf Réponse 2:}
+\item
+Soit $K$ l'ensemble des mots de la forme $x \$ y$ où $x$ et $y$ sont des mots de longueur impaire sur l'alphabet $\{a,b\}$ et la lettre médiane de $x$ est égale à la lettre médiane de $y$. Par exemple $abb\$b$ et $aaaaa \$ bab$ sont des mots dans $K$ mais $aa \$aaa$ n'est pas dans $K$ (le mot à gauche est de longueur paire), $aaa\$aab\$ $ n'est pas dans $K$ (pas de la forme  $x \$ y$) et $aba \$ abaab$ n'est pas dans $K$ (pas la même lettre médiane). 
 
-\noindent
+{\bf Réponse}
+
 $S \rightarrow A\$A$; \; $S \rightarrow B\$B$; \\
 $A \rightarrow CAC$; \; $A \rightarrow a$; \\
 $B \rightarrow CBC$;  \; $B \rightarrow b$; \\
 $C \rightarrow a$; \; $C \rightarrow b$; \\
+
+\end{enumerate}
 
 \bigskip
 
@@ -281,18 +281,7 @@ Considérez l'automate à pile suivant:
 \noindent
 a) Dites si les séquences suivantes sont acceptées par l'automate à pile ci-dessus: $ab$, $acc$, $aac$, $aaacb$.
 
-\noindent
-b) Décrivez le langage accepté par cet automate. (Par une expression ensembliste ou de toute autre façon qui est suffisamment claire et précise pour que le correcteur vous comprenne)
-
-\noindent
-c) Donnez une grammaire non-contextuelle qui génère le même langage.
-
-\bigskip
-
 {\bf Réponse:}
-
-\noindent
-a)
 
 1) ab -> Oui
 
@@ -303,16 +292,20 @@ a)
 4) aaacb -> Oui
 
 \bigskip
-\noindent b)
-
 \noindent
+b) Décrivez le langage accepté par cet automate. (Par une expression ensembliste ou de toute autre façon qui est suffisamment claire et précise pour que le correcteur vous comprenne)
+
+{\bf Réponse:}
+
 C'est le langage débutant par une série de $a$ et suivi par des $b$ et/ou $c$. 
-Le nombre de $a$ est égal est égal au nombre de $b$ plus deux fois le nombre de $c$.
+Le nombre de $a$ est égal est égal au nombre de $b$ plus deux fois le nombre de $c$. Le mot peut être le mot vide.
 
 \bigskip
-\noindent c)
-
 \noindent
+c) Donnez une grammaire non-contextuelle qui génère le même langage.
+
+{\bf Réponse:}
+
 $S \rightarrow aaSc$; \; $S \rightarrow aSb$;  \; $S \rightarrow \epsilon$; \\
 
 \newpage
@@ -337,14 +330,7 @@ $Q \rightarrow Qb$;  \; $Q \rightarrow ab$;
 a) 
 Décrivez le langage généré par cette grammaire. (Par une expression ensembliste ou de toute autre façon qui est suffisamment claire et précise pour que le correcteur vous comprenne. Je suggère d'illustrer votre explication avec quelques exemples bien choisis de séquences qui appartiennent au langage et de séquences qui n'appartiennent pas au langage)
 
-\smallskip 
-
-\noindent
-b) Montrez que $G$ est ambigüe en donnant deux arbres de dérivation distincts pour un même mot.
-\bigskip
-
-\noindent
-{\bf Réponse: a)}
+{\bf Réponse}
 
 \noindent
 $\{$
@@ -353,6 +339,7 @@ $\cup$
 $\{(x)^ic(ba)^i | x = ab^j \wedge i \in {\mathbb N} \wedge j \in {\mathbb N}\}$
 $\}$
 
+\bigskip
 \noindent
 C'est un langage dont le mot peut avoir deux formes:
 
@@ -378,8 +365,11 @@ $abbcbba$
 $aabcbba$
 \bigskip
 
+
 \noindent
-{\bf Réponse: b)}
+b) Montrez que $G$ est ambigüe en donnant deux arbres de dérivation distincts pour un même mot.
+
+{\bf Réponse}
 
 $ S \Rightarrow abPR \Rightarrow abcR \Rightarrow abcba $
 
