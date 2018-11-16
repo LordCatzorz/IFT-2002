@@ -520,7 +520,8 @@ $L=(ab)^*$ Le langage de suites de paires $ab$ (ex: $abababab$)
 
 Supposons que $K_L$ est régulier. Il satisfait donc le lemme de pompage pour une certaine longueur de pompage $p > 0$
 
-Quel que soit $p$, considérons le mot $w = a^pb^p$. Ce mot est de longeur $2p$ et appartient à $K_L$ donc il peut être "pompé".
+Quel que soit $p$, considérons le mot $w = a^pb^p$. Ce mot est de longeur $2p$ et appartient à $K_L$, car les symboles peuvent être réorganisés pour former le mot $(ab)^p$ qui est acceptés par $L$. 
+Donc le mot peut être "pompé".
 
 Plus précisément, il existe $w=xyz$ tel que
 \begin{enumerate}
@@ -540,6 +541,24 @@ $K_L$ n'est pas régulier.
 
 \item 
 Montrez que si $L$ est un langage régulier alors le langage $K_L$ est toujours non-contextuel. 
+
+{\bf Réponse:}
+
+Si $L$ est régulier, alors il peut être écrit par une grammaire régulière.
+
+Appliquons ces transformations aux règles:
+
+Si une règle à la forme $X \Rightarrow aY$, ajouter aussi une règle $X \Rightarrow Ya$ \\
+Si une règle à la forme $X \Rightarrow bY$, ajouter aussi une règle $X \Rightarrow Yb$ \\
+Garder les règles de la formes $X \Rightarrow a$, $X \Rightarrow b$ et $X \Rightarrow \epsilon$
+
+Avec de tels règles, nous gardons la consistence du nombre de caractère du langage régulier, puisque nous n'ajoutons aucun nouveau symboles non-terminal et que nous ne modifions pas les symboles terminales déjà existant dans les règles. 
+Avec l'ajout de nos règles, nous pouvons ordonner les symboles dans n'importe quel ordre.
+
+Par exemple, pour avoir un suite de $a$ suivi d'une suite de $b$ nous utilisons les formes de transormation dont le $a$ est avant le symbole non terminal et que le $b$ est après le symbole non terminal.
+
+Pour avoir les $b$ avant les $a$, nous faisons l'inverse en prenant les règles dont le $b$ sont avant le symbole non terminal et que les $a$ sont après le symbole non terminal.
+
 \item
 Montrez si l'alphabet est maintenant $\{a,b,c\}$ alors on peut trouver un langage régulier $L$ tel que $K_L$ n'est pas non-contextuel. (Évidemment, on ajuste la définition de $\symm$, c'est-à-dire $x \symm y$ si $x$ et $y$ ont le même nombre de $a$, le même nombre de $b$ et le même nombre de $c$.)
 \end{enumerate}
