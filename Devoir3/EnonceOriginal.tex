@@ -1,0 +1,267 @@
+\documentclass[12pt]{article}
+
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+
+
+%SPECIAL SYMBOLS
+
+\newcommand{\CSP}{{\rm CSP}}
+\newcommand{\nin}{\not\in}         % Not in set
+\newcommand{\DA}{{\bf DA }}    % Variety DA
+\newcommand{\then}{\rightarrow}    % Implication arrow
+\newcommand{\into}{\rightarrow}    % Function arrow
+\newcommand{\xbar}{\overline{x}}   % x with an bar on top
+\newcommand{\Xbar}{\overline{X}}   % X with an bar on top
+\newcommand{\ybar}{\overline{y}}   % y with an bar on top
+\newcommand{\abar}{\overline{a}}   % a with an bar on top
+\newcommand{\EQN}{{\rm EQN}}
+\newcommand{\TEQN}{{\rm T\!-\!EQN}}
+\newcommand{\rl}{{\bf R}_1 \vee {\bf L}_1}
+%\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\back}{$\backslash$}
+\renewcommand{\choose}[2]{\genfrac{(}{)}{0pt}{}{#1}{#2}}
+\newcommand{\xor}{\oplus}
+
+\newcommand{\dmd}{% diamond
+  {\qbezier(0,0)(0.5,0.5)(1,1)
+   \qbezier(0,0)(-0.5,0.5)(-1,1)
+   \qbezier(0,2)(0.5,1.5)(1,1)
+   \qbezier(0,2)(-0.5,1.5)(-1,1)}}
+
+\newcommand{\dmdplus}{% diamond with + inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(0,0.5){\line(0,1){1}}
+      \put(-0.5,1){\line(1,0){1}}
+    \end{picture}}}
+
+\newcommand{\dmdminus}{% diamond with - inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(-0.5,1){\line(1,0){1}}
+    \end{picture}}}
+
+\newcommand{\dmdplusminus}{% diamond with +/- inscribed
+  {\unitlength1.6mm
+    \begin{picture}(2.2,2)(-1,0)
+      \dmd
+      \put(0,0.8){\line(0,1){0.8}}
+      \put(-0.4,1.2){\line(1,0){0.8}}
+      \put(-0.4,0.6){\line(1,0){0.8}}
+     \end{picture}}}
+
+
+
+%SHORTCUTS FOR MATHCAL
+
+\newcommand{\cH}{\mathcal{ H}}
+\newcommand{\cC}{\mathcal{ C}}
+\newcommand{\cJ}{\mathcal{ J}}
+\newcommand{\cM}{\mathcal{ M}}
+\newcommand{\cL}{\mathcal{ L}}
+\newcommand{\cR}{\mathcal{ R}}
+\newcommand{\cP}{\mathcal{ P}}
+\newcommand{\cQ}{\mathcal{ Q}}
+
+\newcommand{\Pol}{{\rm Pol}}
+
+
+\newcommand{\maps}\longrightarrow
+\newcommand{\cmaps}\Longrightarrow
+\newcommand{\vocab}{\tau}
+\newcommand{\uest}{\operatorname{{\bf U}}}
+\newcommand{\nest}{\operatorname{{\bf N}}}
+\newcommand{\mest}{\operatorname{{\bf M}}}
+\newcommand{\pest}{\operatorname{{\bf P}}}
+\newcommand{\test}{\operatorname{{\bf T}}}
+\newcommand{\sest}{\operatorname{{\bf S}}}
+\newcommand{\dest}{\operatorname{{\bf D}}}
+\newcommand{\cest}{\operatorname{{\bf C}}}
+\newcommand{\best}{\operatorname{{\bf B}}}
+\newcommand{\aest}{\operatorname{{\bf A}}}
+\newcommand{\kest}{\operatorname{{\bf K}}}
+\newcommand{\hest}{\operatorname{{\bf H}}}
+\newcommand{\gest}{\operatorname{{\bf G}}}
+\newcommand{\csp}{\operatorname{CSP}}
+\newcommand{\tcsp}{\operatorname{TCSP}}
+\newcommand{\tpol}{\operatorname{TPol}}
+\newcommand{\ext}{\operatorname{ext}}
+\newcommand{\set}[1]{\overline{#1}}
+\newcommand{\atomic}{\operatorname{{\mathcal A}}}
+\newcommand{\atomicsent}{\operatorname{{\mathcal B}}}
+\newcommand{\composed}{\circ}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\atom}{\alpha}
+\newcommand{\atomsent}{\beta}
+\newcommand{\sent}{\operatorname{sent}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\ide}{\operatorname{id}}
+\newcommand{\testfixed}{\operatorname{{\mathcal TK}}}
+\newcommand{\diagram}[1]{{#1}^*}
+\newcommand{\sub}{\subseteq}
+
+
+\newcommand{\arity}{\rho}
+\newcommand{\rsymbol}{\operatorname{r}}
+
+
+\newcommand{\imply}[2]{{\bf (#1)$\rightarrow$(#2)}}
+\newcommand{\twoimply}[2]{{\bf (#1)$\leftrightarrow$(#2)}}
+
+
+\newcommand{\dset}{\operatorname{DS}}
+\newcommand{\one}{{\bf 1}}
+\newcommand{\origin}{\operatorname{{\mathcal O}}}
+\newcommand{\image}{\operatorname{{\mathcal I}}}
+\newcommand{\types}{\operatorname{{\mathcal T}}}
+\newcommand{\rel}{\operatorname{rel}}
+\newcommand{\maj}{\operatorname{MAJ}}
+
+\newcommand{\sat}{\operatorname{SAT}}
+
+\newcommand{\pointnolinear}{K_1}
+
+
+\newcommand{\mcd}{\operatorname{gcd}}
+
+
+\newcommand{\NP}{{\rm NP}}
+\newcommand{\coNP}{{\rm co-NP}}
+
+
+
+%\newcommand{\bbbz}{{\mathbb Z}}
+\newcommand{\bbN}{{\mathbb N}}
+\newcommand{\block}{\square}
+\newcommand{\ul}{\underline}
+
+
+\usepackage[latin1]{inputenc} % entree 8 bits iso-latin1
+\usepackage[T1]{fontenc}      % encodage 8 bits des fontes utilisees
+
+
+\topmargin -1.1in 
+\textheight 9.7in
+\setlength{\textwidth}{7.5in}
+\oddsidemargin = -.5in
+
+
+\begin{document}
+
+\smallskip
+\begin{center}
+\large \bf IFT-2002 Informatique Théorique \\ Devoir 3
+\end{center}
+
+\bigskip
+
+
+\noindent {\bf Question 1.}
+
+
+
+Donner le diagramme de transitions d'une machine de Turing qui
+accepte le langage $\{a^{2^n} : n \in \bbN^+\}$. Expliquez également le fonctionnement de votre machine (stratégie de haut niveau, rôle de chaque groupe d'états etc.) {\em Cette explication est obligatoire.}
+
+Il y a plusieurs
+façons de faire mais la plus simple est sans doute d'éliminer à
+chaque passage la moitié des $a$.
+
+{\em Vous ne pouvez pas utiliser les outils de construction modulaire du chapitre 3.2 des anciennes notes de cours ni des machines à plusieurs rubans.}
+
+
+
+
+\bigskip
+
+\noindent {\bf Question 2.}
+
+Un automate à deux piles consiste d'un ensemble fini d'états, d'un ruban d'entrée et de deux piles. Le fonctionnement est très semblable à celui d'un automate avec une seule pile: à chaque étape de son calcul, l'automate peut lire un symbole sur le ruban d'entrée, dépiler un symbole sur chaque pile et empiler un symbole sur chaque pile. Comme dans les automates à pile, l'automate n'est pas obligé de lire un symbole sur le ruban, ni de dépiler, ni d'empiler sur l'une ou l'autre des piles.
+
+Un peu plus formellement un automate à deux piles est un sextuplet $P  = (Q, \Sigma, \Gamma, \rho, q_0, F)$ où
+$\rho$ est la relation de transition et $$\rho \subseteq Q \times (\Sigma \cup \{\epsilon\}) \times (\Gamma \cup \{\epsilon\}) \times (\Gamma \cup \{\epsilon\})  \times Q \times (\Gamma \cup \{\epsilon\}) \times (\Gamma \cup \{\epsilon\}).$$
+
+Une séquence $w$ est acceptée si l'automate peut atteindre un des états acceptants en ayant terminé la lecture de $w$.
+
+Montrez que tout langage Turing-acceptable peut être reconnu par un automate à deux piles. Autrement dit, montrez que pour toute machine de Turing $M$ il existe un automate à deux piles $P$ tel que $L(M) = L(P)$. 
+
+Vous n'avez pas à donner une preuve formelle mais simplement une explication à la fois claire et convaincante. (concise serait aussi appréciée)
+
+
+\bigskip
+
+\noindent {\bf Question 3.}
+
+Une  {\em machine de Turing sans retour} est une machine de Turing $M$ qui à chaque étape de son calcul bouge systématiquement sa tête de lecture/écriture vers la droite. 
+
+\noindent
+Le but de l'exercice est de comprendre la puissance de calcul des machines de Turing sans retour. Dites lequel des trois énoncés suivants est vrai (il n'est pas nécessaire de justifier votre réponse)
+\begin{itemize}
+\item
+un langage $L$ peut être reconnu par une machine de Turing sans retour si et seulement si $L$ peut-être reconnu par un automate fini.
+\item
+un langage $L$ peut être reconnu par une machine de Turing sans retour si et seulement si $L$ peut-être reconnu par un automate à pile.
+\item
+un langage $L$ peut être reconnu par une machine de Turing sans retour si et seulement si $L$ peut-être reconnu par une machine de Turing.
+\end{itemize}
+
+{\bf Question 4.}
+\smallskip
+
+Montrez que le langage suivant est décidable:
+$$P_{AFD} = \{\langle M \rangle : M \mbox{ est un automate fini déterministe et
+ } L(M) \mbox{ contient au moins un mot de longueur paire} \}.$$
+
+{\em En d'autres mots, donnez un algorithme qui reçoit en entrée un automate fini déterministe et qui détermine si oui ou non cet automate accepte au moins un mot de longueur paire. Cet algorithme doit s'arrêter peu importe l'automate fourni en entrée.}
+
+
+\bigskip
+
+\noindent {\bf Question 5.}
+Montrez que le langage suivant est Turing-acceptable. 
+
+\noindent
+${\rm NE_{GNC}} = \{\langle G,H \rangle:G$ et $H$ sont des grammaires non-contextuelles en forme normale de Chomsky et $L(G) \neq L(H)\}.$
+
+{\em En d'autres mots, décrivez un algorithme $A$ qui reçoit en entrée deux grammaires non-contextuelles en forme normale de Chomsky et qui a le comportement suivant. Si $L(G) \neq L(H)$, l'algorithme $A$ s'arrête et accepte après un nombre fini d'étapes mais si $L(G) = L(H)$ alors $A$ soit rejette après un nombre fini d'étapes soit ne s'arrête jamais.}
+
+\bigskip
+
+\noindent {\bf Question 6.}
+
+Montrez que le langage suivant est indécidable
+
+$P_{\rm MT} = \{\langle M \rangle : M$  est une machine de Turing qui accepte au moins un mot de longueur paire$\}$.
+
+{\em En d'autres mots, vous voulez montrer qu'il n'existe aucun algorithme capable de prendre en entrée un programme $M$ et de déterminer s'il existe un $x$ de longueur paire tel que $M$ accepte $x$.}
+
+\bigskip
+
+\noindent {\bf Question 7.}
+Vrai ou faux? Justifiez brièvement.
+
+\begin{enumerate}
+\item Si $L$ est un langage non-contextuel alors son complément $L^c$ est décidable.
+\item
+Si $L_1$ et $L_2$ sont des langages Turing-acceptables, alors $L_1 -
+L_2$ est aussi Turing-acceptable.
+
+{\em Histoire d'éviter toute ambiguïté, $L_1 - L_2 = \{x : x \in L_1 \wedge x \nin L_2\}$.}
+
+\end{enumerate}
+ 
+
+\noindent {\bf Question facultative.}
+
+Soit $a_0 + a_1x + a_2 x^2 + \ldots + a_nx^n = 0$ une équation avec $a_0, \ldots, a_n \in \mathbb Z$. Appelons $a_{max} = \max_i |a_i|$.
+
+Montrez que si cette équation possède une solution alors elle possède une solution dans laquelle $|x| \leq a_{max} (n+1)$. 
+
+Montrez qu'il existe un algorithme qui étant donné une équation de ce type, détermine en temps fini si elle possède ou non une solution $x$ telle que $x \in \mathbb Z.$
+
+\end{document}
