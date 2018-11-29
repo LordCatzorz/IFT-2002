@@ -252,8 +252,20 @@ Montrez que tout langage Turing-acceptable peut être reconnu par un automate à d
 
 Vous n'avez pas à donner une preuve formelle mais simplement une explication à la fois claire et convaincante. (concise serait aussi appréciée)
 
-
 \bigskip
+
+{\bf Réponse:}
+
+Il est possible de voir le ruban de la machine de turing comme deux piles de cette façon:
+
+Tous les éléments à la gauche de la tête de lecture se trouve dans la pile 1 (L'élément le plus près de la tête de lecture est au sommet de la pile).
+
+Tous les éléments à la droite de la tête de lecture se trouve dans la pile 2 (L'élément le plus près de la tête de lecture est au sommet de la pile).
+
+Au départ, la pile 1 est vide et la pile 2 contiens toute la séquence du ruban. L'automate commence par lire sur la pile 2. Si la machine de turing veut faire un déplacement à droite,
+alors on ajoute un symbole sur la pile 1. Dès qu'il y a un déplacement à gauche, on peut écrire sur la pile 2 un symbole, puis on se met à lire sur la pile 1 et ce, jusqu'à ce qu'il y est à nouveau un déplacement vers à droite sur le ruban.
+
+\newpage
 
 \noindent {\bf Question 3.}
 
