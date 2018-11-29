@@ -54,7 +54,10 @@
       \put(-0.4,0.6){\line(1,0){0.8}}
      \end{picture}}}
 
-
+\usepackage{tikz,tikz-qtree}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata,backgrounds,snakes}
+     
 
 %SHORTCUTS FOR MATHCAL
 
@@ -175,9 +178,66 @@ chaque passage la moitié des $a$.
 {\em Vous ne pouvez pas utiliser les outils de construction modulaire du chapitre 3.2 des anciennes notes de cours ni des machines à plusieurs rubans.}
 
 
-
-
 \bigskip
+
+{\bf Réponse:}
+
+\textit{Les transitions manquantes s'en vont toutes à l'état rejetant,
+mais sont omises pour simplifier la présentation de la machine.}
+
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm, semithick]
+  \tikzstyle{every state}=[draw=black,text=black]
+  \tikzstyle{rejecting}=[fill=gray]
+  \node[initial by arrow,state,initial text=] (0) {0};
+  \node[state] (1) [above =of 0] {1};
+  \node[state] (2) [above =of 1] {2};
+  \node[state] (3) [right =of 2] {3};
+  \node[state] (4) [right =of 3] {4};
+  \node[state] (5) [right =of 4] {5};
+  \node[state] (6) [below =of 5] {6};
+  \node[state] (7) [right =of 6] {7};
+  \node[state] (8) [below =of 7] {8};
+  \node[accepting, state] (acc) [above =of 2] {acc};
+  \node[fill=gray, state] (rej) [right =of 1] {rej};
+
+  \path
+  (0) edge node {$a; \$,$ R} (1)
+  (0) edge[bend right, color=red] node {$\sqcup; \sqcup,$ R} (rej)
+  (1) edge node {$a; 0,$ R} (2)
+  (1) edge[color=red] node {$\sqcup; \sqcup,$ R} (rej)
+  (2) edge node {$a; 1,$ R} (3)
+  (2) edge node {$\sqcup; \sqcup,$ R} (acc)
+  (3) edge[bend left] node {$a; 0,$ R} (4)
+  (3) edge[color=red] node {$\sqcup; \sqcup,$ R} (rej)
+  (4) edge[bend left] node {$a; 1,$ R} (3)
+  (4) edge node {$\sqcup; \sqcup,$ L} (5)
+  (5) edge node {$0; \sqcup,$ L} (6)
+  (6) edge[bend left] node {$\$; \$,$ R} (1)
+  (6) edge[loop left, align=center] node {$a; a$, L\\$1; a,$ L} (6)
+  (6) edge node {$0; a,$ R} (7)
+  (7) edge[loop right] node {$a; a,$ R} (7)
+  (7) edge node {$\sqcup; \sqcup,$ L} (8)
+  (8) edge node {$a; \sqcup,$ L} (6)
+  ;
+
+\end{tikzpicture}
+
+La stratégie de cet automate est de supprimer un caractère sur deux à chaque itération, et d'accepter si on arrive avec un mot de 2 caractères.
+
+Pour se faire, on marque le début du mot avec un $\$$ (état 0) et on remplace le 2e a par un $0$ (état 1).
+
+(État 2)Si on arrive arrive au bout du ruban à ce moment, la machine accepte. 
+
+Sinon, les états 3 et 4 vont alterner la chaine avec des 1 et des 0 jusqu'au bout du mots sur le ruban, puis va regarder le derniere caractère du mot (État 5).
+
+Les états 6, 7 et 8 vont boucler sur le ruban pour retirer tous les caractères $0$ en s'assurant de ne pas avoir d'espaces et remplacer les $1$ par des $a$. On se retrouve ainsi avec la moitié des lettres inscrite sur le ruban.
+
+Dès que l'on trouve un $\$$, alors on sait que l'on est revenu au début du mot et tourne à l'état 1 pour refaire toutes la boucle.
+
+Les états 0, 1 vérifient que le mot sur le ruban est d'au moins de longueur 2 et l'état 3 vérifie qu'il est de longueur pair. Si ce n'est pas le cas, le mot est refusé.
+
+
+\newpage
 
 \noindent {\bf Question 2.}
 
