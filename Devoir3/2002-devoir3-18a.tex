@@ -301,6 +301,27 @@ $$P_{AFD} = \{\langle M \rangle : M \mbox{ est un automate fini déterministe et
 
 {\em En d'autres mots, donnez un algorithme qui reçoit en entrée un automate fini déterministe et qui détermine si oui ou non cet automate accepte au moins un mot de longueur paire. Cet algorithme doit s'arrêter peu importe l'automate fourni en entrée.}
 
+{\bf Réponse:}
+
+Obtenir le nombre d'état de $M$ et nommons ce nombre $n$.
+
+Si $n$ est impaire, retirer $1$ et affecter cette nouvelle valeur à $n$.
+
+
+Obtenir un iterateur $i$ qui commence à 0. \bigskip
+
+Tant que $i < n$ faire
+\begin{itemize}
+  \item Pour chaque tous les mots possible de longueur $i$ en utilisant l'alphabet de $M$, vérifier si ce mot est accepté par $M$.
+  \item Si le mot est accepté par $M$: $Accepter$.
+  \item Sinon, augmenter $i$ de 2 et retourner au début de la boucle.
+\end{itemize}
+
+Si la machine ne s'est pas arrêter avec $Accepter$, alors $Refuser$.
+
+
+\newpage
+
 
 \bigskip
 
