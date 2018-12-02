@@ -319,7 +319,6 @@ Tant que $i < n$ faire
 
 Si la machine ne s'est pas arrêter avec $Accepter$, alors $Refuser$.
 
-
 \newpage
 
 
@@ -333,7 +332,23 @@ ${\rm NE_{GNC}} = \{\langle G,H \rangle:G$ et $H$ sont des grammaires non-contex
 
 {\em En d'autres mots, décrivez un algorithme $A$ qui reçoit en entrée deux grammaires non-contextuelles en forme normale de Chomsky et qui a le comportement suivant. Si $L(G) \neq L(H)$, l'algorithme $A$ s'arrête et accepte après un nombre fini d'étapes mais si $L(G) = L(H)$ alors $A$ soit rejette après un nombre fini d'étapes soit ne s'arrête jamais.}
 
-\bigskip
+
+{\bf Réponse:}
+
+(1) Si l'alphabet de symbole terminaux de $G$ est différent de l'alphabet de symbole terminaux de $H$, alors $Refuser$.
+
+(2) Utiliser la force brute pour générer un mot $w$ avec les symboles terminaux.
+
+(3) En utilisant la force brute, tenter de faire une dérivation de $G$ en utilisant au plus $2 |w| - 1$ étapes. Si trouvé, $R_1 = Vrai$ sinon, $R_1 = Faux$.
+
+(4) En utilisant la force brute, tenter de faire une dérivation de $H$ en utilisant au plus $2 |w| - 1$ étapes. Si trouvé, $R_2 = Vrai$ sinon, $R_2 = Faux$.
+
+(5) Si $R_1 = R_2$, générer un nouveau $w$ (le mot suivant) et retourner à l'étape (3) avec de nouveau $w$.
+
+(6) Si $R_1 \neq R_2$, alors $Refuser$.
+
+
+\newpage
 
 \noindent {\bf Question 6.}
 
@@ -342,6 +357,13 @@ Montrez que le langage suivant est indécidable
 $P_{\rm MT} = \{\langle M \rangle : M$  est une machine de Turing qui accepte au moins un mot de longueur paire$\}$.
 
 {\em En d'autres mots, vous voulez montrer qu'il n'existe aucun algorithme capable de prendre en entrée un programme $M$ et de déterminer s'il existe un $x$ de longueur paire tel que $M$ accepte $x$.}
+
+
+{\bf Réponse:}
+
+
+\newpage
+
 
 \bigskip
 
@@ -358,6 +380,12 @@ L_2$ est aussi Turing-acceptable.
 
 \end{enumerate}
  
+
+
+{\bf Réponse:}
+
+
+\newpage
 
 \noindent {\bf Question facultative.}
 
