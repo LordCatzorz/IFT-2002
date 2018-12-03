@@ -372,17 +372,24 @@ Vrai ou faux? Justifiez brièvement.
 
 \begin{enumerate}
 \item Si $L$ est un langage non-contextuel alors son complément $L^c$ est décidable.
+
+{\bf Réponse}
+
+Vrai, selon le théorème que si $L$ est décidable, alors le langage $L^c$ est aussi décidable. Ainsi que le théorème qui indique que le langage non-contextuel est décidable.
+
+EstNonContextuel($L$) $\implies$ EstDecidable($L$) $\implies$ EstDecidable($L^c$)
+
 \item
 Si $L_1$ et $L_2$ sont des langages Turing-acceptables, alors $L_1 -
 L_2$ est aussi Turing-acceptable.
 
 {\em Histoire d'éviter toute ambiguïté, $L_1 - L_2 = \{x : x \in L_1 \wedge x \nin L_2\}$.}
 
-\end{enumerate}
- 
-
-
 {\bf Réponse:}
+
+Faux, si nous avons un langage $L_2$ qui refuse toutes les mots de $L_1$, alors en aucun cas, la machine $L_1 - L_2$ ne pourra jamais s'arrêter en acceptant.
+
+\end{enumerate}
 
 
 \newpage
