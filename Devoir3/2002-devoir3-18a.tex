@@ -361,6 +361,36 @@ $P_{\rm MT} = \{\langle M \rangle : M$  est une machine de Turing qui accepte au
 
 {\bf Réponse:}
 
+Considérons la fonction $f$ qui étant donné $\langle N, w \rangle$ (où $N$ est une machine de turing et et $w$ est une entrée pour $N$) retourne la description du programme suivant:
+
+\bigskip
+
+\noindent $M_{N,w} = $"Entrée $x$
+
+\indent Si $|x|$ n'est pas divisible par deux alors {\bf rejeter} $x$
+
+\indent Si $|x|$ est divisible par deux alors simuler $N$ sur l'entrée $w$
+
+\indent Si N accepte $w$ alors {\bf accepter} $x$"
+
+\bigskip
+
+Notons que $f$ est calculable.
+
+Si $N$ accepte $w$ alors $M_{N,w}$ n'accepte que les mots de longueur paire, donc $\langle M_{N,w}\rangle$ appartient à $P_{MT}$
+
+Si $N$ n'accepte pas $w$ alors $M_{N,w}$ n'accepte aucun mot, en particulier aucun mot de longueur paire. 
+
+Donc $\langle M_{N,w}\rangle$ n'appartient pas à $P_{MT}$.
+
+
+\bigskip
+
+Ainsi, $\langle N, w \rangle \in Acc_{MT} \Longleftrightarrow \langle M_{N,w} \rangle \in P_{MT}$ et donc $f$ est une réduction de $Acc_{MT}$ vers $P_{MT}$.
+
+Et puisque $Acc_{MT}$ est indécisable, $P_{MT}$ est également indécidable.
+
+
 
 \newpage
 
