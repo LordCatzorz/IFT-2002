@@ -161,6 +161,10 @@
 \large \bf IFT-2002 Informatique Théorique \\ Devoir 3
 \end{center}
 
+\hfill 111 124 564
+
+\hfill Raphaël Sylvain
+
 \bigskip
 
 
@@ -182,8 +186,7 @@ chaque passage la moitié des $a$.
 
 {\bf Réponse:}
 
-\textit{Les transitions manquantes s'en vont toutes à l'état rejetant,
-mais sont omises pour simplifier la présentation de la machine.}
+
 
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm, semithick]
   \tikzstyle{every state}=[draw=black,text=black]
@@ -199,6 +202,12 @@ mais sont omises pour simplifier la présentation de la machine.}
   \node[state] (8) [below =of 7] {8};
   \node[accepting, state] (acc) [above =of 2] {acc};
   \node[fill=gray, state] (rej) [right =of 1] {rej};
+  \node[draw=none, align=center] (text) [right =of 5] {
+    \textit{Les transitions manquantes}\\
+    \textit{s'en vont toutes à l'état rejetant,}\\
+    \textit{mais sont omises pour simplifier}\\
+    \textit{la présentation de la machine.}\\
+  };
 
   \path
   (0) edge node {$a; \$,$ R} (1)
