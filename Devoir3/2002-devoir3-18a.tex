@@ -262,7 +262,7 @@ Tous les éléments à la gauche de la tête de lecture se trouve dans la pile 1 (L'
 
 Tous les éléments à la droite de la tête de lecture se trouve dans la pile 2 (L'élément le plus près de la tête de lecture est au sommet de la pile).
 
-Au départ, la pile 1 est vide et la pile 2 contiens toute la séquence du ruban. L'automate commence par lire sur la pile 2. Si la machine de turing veut faire un déplacement à droite,
+Au départ, la pile 1 est vide et la pile 2 contient toute la séquence du ruban. L'automate commence par lire sur la pile 2. Si la machine de turing veut faire un déplacement à droite,
 alors on ajoute un symbole sur la pile 1. Dès qu'il y a un déplacement à gauche, on peut écrire sur la pile 2 un symbole, puis on se met à lire sur la pile 1 et ce, jusqu'à ce qu'il y est à nouveau un déplacement vers à droite sur le ruban.
 
 \newpage
@@ -312,7 +312,7 @@ Obtenir un iterateur $i$ qui commence à 0. \bigskip
 
 Tant que $i < n$ faire
 \begin{itemize}
-  \item Pour chaque tous les mots possible de longueur $i$ en utilisant l'alphabet de $M$, vérifier si ce mot est accepté par $M$.
+  \item Pour tous les mots possible de longueur $i$ en utilisant l'alphabet de $M$, vérifier si ce mot est accepté par $M$.
   \item Si le mot est accepté par $M$: $Accepter$.
   \item Sinon, augmenter $i$ de 2 et retourner au début de la boucle.
 \end{itemize}
@@ -431,5 +431,56 @@ Soit $a_0 + a_1x + a_2 x^2 + \ldots + a_nx^n = 0$ une équation avec $a_0, \ldots
 Montrez que si cette équation possède une solution alors elle possède une solution dans laquelle $|x| \leq a_{max} (n+1)$. 
 
 Montrez qu'il existe un algorithme qui étant donné une équation de ce type, détermine en temps fini si elle possède ou non une solution $x$ telle que $x \in \mathbb Z.$
+
+\bigskip
+
+{\bf Réponse 1:}
+
+Notons la solution de $a_{max} (n+1)$ $\lambda$
+
+Séparons l'équation en deux partie. $\alpha = a_0 + a_1x + a_2x^2 +\ldots a_{n-1}x^{n-1}$ et $\beta = a_nx^n$ avec $a_n \neq 0$ (Si $a_n = 0$, alors prendre le plus le dernier $a_kx^k$ par ordre croissant de $k$ comme $\beta$)
+
+Si les tous les $a_k$ = $a_n+\psi$ et $\psi > a_n$,
+
+alors nous avons 
+$$\alpha = \sum_{i=0}^{n-1} ((a_n + \psi)x)^i $$
+$$= (a_n + \psi)\sum_{i=0}^{n-1} (x)^i $$
+$$= (a_n + \psi)\frac{1-x^n}{1-x}$$
+
+et
+$$\beta = a_nx^n$$
+
+En perdant un peu patiente, nous pourrons comparer les ratios de $\alpha$ sur $\beta$ et trouver qu'avec 
+
+(1) $x = a_{max} (n+1) - 1$
+
+(2) $x = a_{max} (n+1)$
+
+(3) $x = a_{max} (n+1) + 1$
+
+Nous trouverons qu'avec (1), $\frac{\alpha}{\beta} > 1$. Qu'avec (2) $\frac{\alpha}{\beta} = 1$ et qu'avec (3), $\frac{\alpha}{\beta} < 1$.
+
+Ceci nous permettera de conclure que dépasser $x = a_{max} (n+1)$, le dernier terme augmentera tellement plus vite que les autres termes que l'équation ne s'approchera plus jamais de 0. La différence continuera de croire pour tout $x > a_{max}(n+1)$
+
+\bigskip
+
+{\bf Réponse 2:}
+
+Étant donné que la réponse 1 nous permet de savoir que $|x| \leq a_{max} (n+1)$, nous pouvons utiliser l'algorithme suivant:
+
+(1) Calculer $a_{max} (n+1)$. L'appeler $y$.
+
+(2) Pour $i = 0$
+
+(3) Si $i > y$, {\bf Refuser} 
+
+(4) Calculer l'équation avec $x = i$. Si l'équation = 0, alors {\bf Accepter}
+
+(5) Calculer l'équation avec $x = -i$. Si l'équation = 0, alors {\bf Accepter}
+
+(6) Augmenter $i$ de $1$
+
+(7) Retourner à l'étape 3.
+
 
 \end{document}
